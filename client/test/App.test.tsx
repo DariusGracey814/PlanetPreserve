@@ -1,3 +1,5 @@
+@jest-environment jsdom
+
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "../src/App";
@@ -12,3 +14,4 @@ test("renders planet preserve h1", () => {
   // 3. Expect element to be in the document if exists test is passed
   expect(h1Element).toBeInTheDocument();
 });
+
