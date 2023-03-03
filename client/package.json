@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test": "jest",
+    "test": "react-scripts test",
     "start": "webpack serve",
     "build": "NODE_ENV=production webpack",
     "build:dev": "webpack",
