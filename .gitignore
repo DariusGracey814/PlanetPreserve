@@ -1,0 +1,7 @@
+/client/dist
+/client/webpack.config.js
+/client/node_modules
+/store
+/utils
+server
+
