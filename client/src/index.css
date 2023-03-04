@@ -91,14 +91,25 @@ form {
   transition: all 0.3s ease;
 }
 
-.btn-form {
+.btn-form,
+.nav-link {
   background: var(--main--green);
+}
+
+.btn-form {
   width: 100%;
   margin-top: 1em;
   color: #ffffff;
 }
 
 .btn-form:active,
-.btn-form:hover {
+.btn-form:hover,
+.nav-link:hover {
   background: #07342f;
 }
+
+/* ----- NAVIGATION ----- */
+.nav-link {
+  border-radius: 2em;
+}
+
