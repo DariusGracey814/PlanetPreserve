@@ -123,14 +123,14 @@ form {
 
 .form-icon,
 .lock-icon {
-  top: 43px;
+  top: 44px;
   left: 10px;
   color: var(--main--green);
   z-index: 10;
 }
 
 .form-icon {
-  font-size: 1.05rem;
+  font-size: 1.03rem;
 }
 
 .lock-icon {
