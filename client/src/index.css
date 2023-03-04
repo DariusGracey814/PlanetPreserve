@@ -9,7 +9,8 @@
 :root {
   /* Fonts */
   --roboto--ff: "Roboto", sans-serif;
-  --Lato-ff: "Lato", sans-serif;
+  --Lato--ff: "Lato", sans-serif;
+  --Oswald--ff: "Oswald", sans-serif;
 
   /* Colors */
   --main--green: #083e38;
@@ -20,6 +21,7 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: var(--roboto--ff);
 }
 
 /* ----- FLEXBOX AND GRID ----- */
