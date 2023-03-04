@@ -1,9 +1,8 @@
 import React from "react";
-import hero from "../../assets/Hero_half.jpg";
 
 const LoginPage: React.FC = () => {
   return (
-    <section>
+    <section className="grid grid-2-cols">
       <div
         className="hero-bg border-4 border-green-600"
         aria-label="nature green graphic background with gold tree leaves "
@@ -34,7 +33,7 @@ const LoginPage: React.FC = () => {
             />
           </div>
 
-          <div className="d-flex">
+          <div className="d-flex w-100">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>

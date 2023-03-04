@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ----- FLEXBOX AND GRID ----- */
+.grid {
+  display: grid;
+}
+
+.grid-2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* ----- HEIGHT AND WIDTH ----- */
+w-100 {
+  width: 100%;
+}
+
 /* ----- MAIN CONTAINER ----- */
 .main-container {
   max-width: 1300px;
