@@ -123,7 +123,7 @@ form {
 
 .form-icon,
 .lock-icon {
-  top: 44px;
+  top: 43px;
   left: 10px;
   color: var(--main--green);
   z-index: 10;
