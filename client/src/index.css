@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ----- MAIN CONTAINER ----- */
+.main-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  border: 2px solid red;
+}
