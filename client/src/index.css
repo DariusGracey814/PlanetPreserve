@@ -113,3 +113,8 @@ form {
   border-radius: 2em;
 }
 
+/* ----- TEXT ----- */
+.content2 {
+  display: block;
+  line-height: 1;
+}

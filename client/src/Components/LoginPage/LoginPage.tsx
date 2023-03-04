@@ -1,4 +1,5 @@
 import React from "react";
+import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
   return (
@@ -8,7 +9,8 @@ const LoginPage: React.FC = () => {
         aria-label="nature green graphic background with gold tree leaves "
       ></div>
       <div className="border-4 border-indigo-600">
-        <h1 className="mb-10"></h1>
+        {/* Top Form Component */}
+        <GetStarted />
         {/* Login form error message */}
         {/* {validateError.map((error) => {
         return (
