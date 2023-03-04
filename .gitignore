@@ -1,7 +1,7 @@
 /client/dist
 /client/webpack.config.js
 /client/node_modules
-/store
-/utils
+/client/store
+/client/utils
 server
 
