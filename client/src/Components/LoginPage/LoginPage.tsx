@@ -2,7 +2,7 @@ import React from "react";
 
 const LoginPage: React.FC = () => {
   return (
-    <div className="">
+    <div className="border-8 border-indigo-600">
       <h1 className="mb-10">Login Page</h1>
       {/* Login form error message */}
       {/* {validateError.map((error) => {
