@@ -8,3 +8,12 @@
   margin: 0 auto;
   border: 2px solid red;
 }
+
+/* ----- HERO BACKGROUND IMAGE ----- */
+.hero-bg {
+  width: 100%;
+  height: 100vh;
+  background-image: url("./assets/HeroGraphic.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

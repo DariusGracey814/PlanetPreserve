@@ -1,51 +1,58 @@
 import React from "react";
+import hero from "../../assets/Hero_half.jpg";
 
 const LoginPage: React.FC = () => {
   return (
-    <div className="border-8 border-indigo-600">
-      <h1 className="mb-10">Login Page</h1>
-      {/* Login form error message */}
-      {/* {validateError.map((error) => {
+    <section>
+      <div
+        className="hero-bg border-4 border-green-600"
+        aria-label="nature green graphic background with gold tree leaves "
+      ></div>
+      <div className="border-4 border-indigo-600">
+        <h1 className="mb-10">Login Page</h1>
+        {/* Login form error message */}
+        {/* {validateError.map((error) => {
         return (
           <div key={validateError.indexOf(error)} className="text-red-500 para">
             {error}
           </div>
         );
       })} */}
-      {/* Login Form */}
-      <form method="post">
-        <div className="d-flex">
-          <label htmlFor="InputUsername" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            id="InputUsername"
-            className="form-control border"
-            aria-describedby="username"
-            // ref={usernameRef}
-            required
-          />
-        </div>
+        {/* Login Form */}
+        <form method="post">
+          <div className="d-flex">
+            <label htmlFor="InputUsername" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="InputUsername"
+              className="form-control border"
+              aria-describedby="username"
+              // ref={usernameRef}
+              required
+            />
+          </div>
 
-        <div className="d-flex">
-          <label htmlFor="InputPassword" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control border"
-            // ref={passwordRef}
-            required
-          />
-        </div>
+          <div className="d-flex">
+            <label htmlFor="InputPassword" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className="form-control border"
+              // ref={passwordRef}
+              required
+            />
+          </div>
 
-        {/* Submit Button */}
-        <button type="submit" className="btn btn-form">
-          Submit
-        </button>
-      </form>
-    </div>
+          {/* Submit Button */}
+          <button type="submit" className="btn btn-form">
+            Submit
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 
