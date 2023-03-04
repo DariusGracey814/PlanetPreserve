@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
+import { AiFillLock } from "react-icons/ai";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
@@ -22,24 +24,26 @@ const LoginPage: React.FC = () => {
       })} */}
         {/* Login Form */}
         <form method="post">
-          <div className="flex flex-col">
+          <div className="relative flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
+            <FaUserAlt className="absolute form-icon" />
             <input
               type="text"
               id="InputUsername"
-              className="form-control border shadow-sm"
+              className="relative form-control border shadow-sm"
               aria-describedby="username"
               // ref={usernameRef}
               required
             />
           </div>
 
-          <div className="flex flex-col mb-5">
+          <div className=" relative flex flex-col mb-5">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
+            <AiFillLock className="absolute form-icon lock-icon" />
             <input
               type="password"
               className="form-control border shadow-sm"

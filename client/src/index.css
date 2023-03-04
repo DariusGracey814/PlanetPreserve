@@ -91,7 +91,7 @@ form {
 }
 
 .form-control {
-  padding: 0.6em 1em;
+  padding: 0.6em 2em;
   margin-bottom: 1em;
   background: var(--white-offset);
 }
@@ -119,6 +119,22 @@ form {
 .btn-form:hover,
 .nav-link:hover {
   background: #07342f;
+}
+
+.form-icon,
+.lock-icon {
+  top: 43px;
+  left: 10px;
+  color: var(--main--green);
+  z-index: 10;
+}
+
+.form-icon {
+  font-size: 1.05rem;
+}
+
+.lock-icon {
+  font-size: 1.3rem;
 }
 
 /* ----- NAVIGATION ----- */
