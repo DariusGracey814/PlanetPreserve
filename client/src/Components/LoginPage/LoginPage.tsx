@@ -1,14 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
   return (
     <section className="grid grid-2-cols">
       <div
-        className="hero-bg border-4 border-green-600"
+        className="hero-bg"
         aria-label="nature green graphic background with gold tree leaves "
       ></div>
-      <div className="border-4 border-indigo-600">
+      <div>
         {/* Top Form Component */}
         <GetStarted />
         {/* Login form error message */}
@@ -28,20 +29,20 @@ const LoginPage: React.FC = () => {
             <input
               type="text"
               id="InputUsername"
-              className="form-control border"
+              className="form-control border shadow-sm"
               aria-describedby="username"
               // ref={usernameRef}
               required
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-5">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
             <input
               type="password"
-              className="form-control border"
+              className="form-control border shadow-sm"
               // ref={passwordRef}
               required
             />
@@ -51,6 +52,16 @@ const LoginPage: React.FC = () => {
           <button type="submit" className="btn btn-form">
             Submit
           </button>
+
+          {/* Username and Password forgot links  */}
+          <div className="flex justify-between mt-5 underline">
+            <p>
+              <Link to="/">Forgot Username</Link>
+            </p>
+            <p>
+              <Link to="/s">Forgot Password</Link>
+            </p>
+          </div>
         </form>
       </div>
     </section>
