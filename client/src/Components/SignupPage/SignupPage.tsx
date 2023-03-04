@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
+import { MdEmail } from "react-icons/md";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
-const LoginPage: React.FC = () => {
+const SignupPage: React.FC = () => {
   return (
     <section className="grid grid-2-cols">
       <div
@@ -24,6 +25,7 @@ const LoginPage: React.FC = () => {
       })} */}
         {/* Login Form */}
         <form method="post">
+          {/* Username */}
           <div className="relative flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
@@ -39,7 +41,23 @@ const LoginPage: React.FC = () => {
             />
           </div>
 
-          <div className=" relative flex flex-col mb-5">
+          {/* Email Address */}
+          <div className="relative flex flex-col">
+            <label htmlFor="InputEmail" className="form-label">
+              Username
+            </label>
+            <MdEmail className="absolute form-icon" />
+            <input
+              type="text"
+              id="InputEmail"
+              className="relative form-control border shadow-sm"
+              aria-describedby="email"
+              // ref={usernameRef}
+              required
+            />
+          </div>
+
+          <div className=" relative flex flex-col mb-3">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
@@ -51,25 +69,22 @@ const LoginPage: React.FC = () => {
               required
             />
           </div>
+          {/* Username and Password forgot links  */}
+          <div>
+            <p className="text-center">
+              By clicking sign up you agree with the{" "}
+              <span className="underline clr-main">terms and services</span>
+            </p>
+          </div>
 
           {/* Submit Button */}
           <button type="submit" className="btn btn-form">
-            Login
+            Sign up
           </button>
-
-          {/* Username and Password forgot links  */}
-          <div className="flex justify-between mt-5 underline">
-            <p>
-              <Link to="/">Forgot Username</Link>
-            </p>
-            <p>
-              <Link to="/s">Forgot Password</Link>
-            </p>
-          </div>
         </form>
       </div>
     </section>
   );
 };
 
-export default LoginPage;
+export default SignupPage;
