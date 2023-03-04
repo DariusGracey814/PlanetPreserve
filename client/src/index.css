@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Fonts */
+  --roboto--ff: "Roboto", sans-serif;
+  --Lato-ff: "Lato", sans-serif;
+
+  /* Colors */
+  --main--green: #083e38;
+  --white-offset: #f8f8f8;
+  --tan-clr: #e6c38d;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
 /* ----- FLEXBOX AND GRID ----- */
 .grid {
   display: grid;
@@ -70,7 +90,7 @@ form {
 }
 
 .btn-form {
-  background: #083e38;
+  background: var(--main--green);
   width: 100%;
   margin-top: 1em;
   color: #ffffff;
