@@ -11,6 +11,14 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
 /* ----- HEIGHT AND WIDTH ----- */
 w-100 {
   width: 100%;
@@ -30,4 +38,45 @@ w-100 {
   background-image: url("./assets/HeroGraphic.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+/* ------ FORMS ------ */
+form {
+  border: 2px solid black;
+  max-width: 500px;
+  margin: 1em auto 3em;
+}
+
+.para {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-label {
+  margin-bottom: 0.4em;
+}
+
+.form-control {
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.btn {
+  padding: 0.7em 1.8em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-form {
+  background: #083e38;
+  width: 100%;
+  margin-top: 1em;
+  color: #ffffff;
+}
+
+.btn-form:active,
+.btn-form:hover {
+  background: #07342f;
 }

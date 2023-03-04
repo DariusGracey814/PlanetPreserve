@@ -8,7 +8,7 @@ const LoginPage: React.FC = () => {
         aria-label="nature green graphic background with gold tree leaves "
       ></div>
       <div className="border-4 border-indigo-600">
-        <h1 className="mb-10">Login Page</h1>
+        <h1 className="mb-10"></h1>
         {/* Login form error message */}
         {/* {validateError.map((error) => {
         return (
@@ -19,7 +19,7 @@ const LoginPage: React.FC = () => {
       })} */}
         {/* Login Form */}
         <form method="post">
-          <div className="d-flex">
+          <div className="flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
@@ -33,7 +33,7 @@ const LoginPage: React.FC = () => {
             />
           </div>
 
-          <div className="d-flex w-100">
+          <div className="flex flex-col">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
