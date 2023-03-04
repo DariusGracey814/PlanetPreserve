@@ -44,11 +44,11 @@ const SignupPage: React.FC = () => {
           {/* Email Address */}
           <div className="relative flex flex-col">
             <label htmlFor="InputEmail" className="form-label">
-              Username
+              Email
             </label>
             <MdEmail className="absolute form-icon" />
             <input
-              type="text"
+              type="email"
               id="InputEmail"
               className="relative form-control border shadow-sm"
               aria-describedby="email"
