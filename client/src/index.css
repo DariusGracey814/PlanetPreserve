@@ -46,6 +46,11 @@ w-100 {
   width: 100%;
 }
 
+/* ----- MARGIN AND HEIGHT----- */
+.me-10 {
+  margin-bottom: 3em;
+}
+
 /* ----- MAIN CONTAINER ----- */
 .main-container {
   max-width: 1300px;

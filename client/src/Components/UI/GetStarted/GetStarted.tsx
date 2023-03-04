@@ -3,10 +3,10 @@ import logo from "../../../assets/tree-logo-apple.png";
 
 const GetStarted: React.FC = () => {
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center text-center me-10">
       {/* Image  */}
       <img
-        className="mt-4"
+        className="mt-5"
         src={logo}
         alt="planet preserve logo"
         width="130px"
