@@ -1,9 +1,12 @@
 import React from "react";
+import Container from "./Components/UI/Container/Container";
 
 const App: React.FC = () => {
   return (
     <div>
-      <h1>Planet Preserve</h1>
+      <Container>
+        <h1 className="text-3xl">Planet Preserve</h1>
+      </Container>
     </div>
   );
 };
