@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
             />
           </div>
 
-          <div className=" relative flex flex-col mb-5">
+          <div className="relative flex flex-col mb-5">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
