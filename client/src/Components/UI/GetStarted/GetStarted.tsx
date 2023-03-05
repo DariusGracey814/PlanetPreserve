@@ -19,7 +19,7 @@ const GetStarted: React.FC = () => {
       </h1>
 
       {/* Text */}
-      <p>
+      <p className="border-2 border-blue-600">
         Track you contributions towards saving earth
         <span className="content2">
           while seeing what people are doing all over.
