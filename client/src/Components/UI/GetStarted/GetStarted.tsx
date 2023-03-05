@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/tree-logo-apple.png";
+import logo from "../../../asset/tree-logo-apple.png";
 
 const GetStarted: React.FC = () => {
   return (
