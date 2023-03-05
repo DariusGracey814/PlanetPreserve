@@ -21,7 +21,7 @@ const GetStarted: React.FC = () => {
       </h1>
 
       {/* Text */}
-      <p>
+      <p className="text-sm">
         Track you contributions towards saving earth
         <span className="content2">
           while seeing what people are doing all over.
