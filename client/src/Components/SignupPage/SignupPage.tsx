@@ -1,61 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { formDataActions } from "../../../store/forms";
-import { RootState } from "../../../store/store";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const SignupPage: React.FC = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-
-  // Form Refs
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-
-  const dispatch = useDispatch();
-
-  // Entered email and password stored in redux
-  const enteredEmail = useSelector((state: RootState) => state.FormData.email);
-  const enteredPassword = useSelector(
-    (state: RootState) => state.FormData.password
-  );
-  const enteredUsername = useSelector(
-    (state: RootState) => state.FormData.username
-  );
-
-  // Redux validate state
-  const validateError = useSelector(
-    (state: RootState) => state.FormData.errorMessage
-  );
-
-  // Errors array (map into)
-  const errors: string[] = Array.from(validateError);
-
-  // Submit Handler
-  const submitHandler = (evt: React.FormEvent) => {
-    evt.preventDefault();
-
-    // Clear old errorMessages
-    dispatch(formDataActions.setErrorMessage());
-
-    // Set state with input values
-    const userName = usernameRef.current!.value;
-    const userEmail = emailRef.current!.value;
-    const userPassword = passwordRef.current!.value;
-
-    // Send to redux store for validation
-    dispatch(formDataActions.setUsername(userName));
-    dispatch(formDataActions.setEmail(userEmail));
-    dispatch(formDataActions.setPassword(userPassword));
-  };
-
   return (
     <section className="grid grid-2-cols">
       <div
@@ -66,7 +16,7 @@ const SignupPage: React.FC = () => {
         {/* Top Form Component */}
         <GetStarted />
         {/* Login form error message */}
-        {validateError.map((error) => {
+        {/* {validateError.map((error) => {
           return (
             <div
               key={validateError.indexOf(error)}
@@ -75,25 +25,21 @@ const SignupPage: React.FC = () => {
               {error}
             </div>
           );
-        })}
+        })} */}
         {/* Login Form */}
-        <form
-          className="border-2 border-red-600"
-          method="post"
-          onSubmit={submitHandler}
-        >
+        <form method="post">
           {/* Username */}
           <div className="relative flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
-            <FaUserAlt className="absolute form-icon" />
+            <FaUserAlt className="absolute form-icon form-icon2" />
             <input
               type="text"
               id="InputUsername"
               className="relative form-control border shadow-sm"
               aria-describedby="username"
-              ref={usernameRef}
+              // ref={usernameRef}
               required
             />
           </div>
@@ -103,13 +49,13 @@ const SignupPage: React.FC = () => {
             <label htmlFor="InputEmail" className="form-label">
               Email
             </label>
-            <MdEmail className="absolute form-icon" />
+            <MdEmail className="absolute form-icon email-icon" />
             <input
               type="email"
               id="InputEmail"
               className="relative form-control border shadow-sm"
               aria-describedby="email"
-              ref={emailRef}
+              // ref={emailRef}
               required
             />
           </div>
@@ -118,17 +64,17 @@ const SignupPage: React.FC = () => {
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
-            <AiFillLock className="absolute form-icon lock-icon" />
+            <AiFillLock className="absolute lock-icon lock-icon2" />
             <input
               type="password"
               className="form-control border shadow-sm"
-              ref={passwordRef}
+              // ref={passwordRef}
               required
             />
           </div>
           {/* Username and Password forgot links  */}
           <div>
-            <p className="text-center">
+            <p className="text-center text-sm">
               By clicking sign up you agree with the{" "}
               <span className="underline clr-main">terms and services</span>
             </p>

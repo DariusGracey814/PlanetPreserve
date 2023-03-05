@@ -59,6 +59,10 @@ w-100 {
   padding-bottom: 3em;
 }
 
+.main {
+  overflow: hidden;
+}
+
 /* ----- MAIN CONTAINER ----- */
 .main-container {
   max-width: 1300px;
@@ -77,23 +81,24 @@ w-100 {
 
 /* ------ FORMS ------ */
 form {
-  max-width: 500px;
-  margin: 0 auto 3em;
+  max-width: 420px;
+  margin: 1.5em auto 3em;
 }
 
 .para {
   max-width: 500px;
-  margin: 0 auto 0.5em;
+  margin: 0.5em auto 0;
   padding: 0.3em;
   color: var(--main--green);
 }
 
 .form-label {
   margin-bottom: 0.4em;
+  font-size: 0.9rem;
 }
 
 .form-control {
-  padding: 0.6em 2.1em;
+  padding: 0.5em 1.9em;
   margin-bottom: 1em;
   background: var(--white-offset);
 }
@@ -113,7 +118,7 @@ form {
 
 .btn-form {
   width: 100%;
-  margin-top: 1em;
+  margin-top: 0.5em;
   color: #ffffff;
 }
 
@@ -125,18 +130,33 @@ form {
 
 .form-icon,
 .lock-icon {
-  top: 43px;
-  left: 10px;
   color: var(--main--green);
   z-index: 10;
 }
 
 .form-icon {
-  font-size: 1.03rem;
+  font-size: 1rem;
+  left: 10px;
+  top: 43px;
+}
+
+.form-icon2,
+.email-icon {
+  top: 41px;
+}
+
+.email-icon {
+  font-size: 1.1rem;
 }
 
 .lock-icon {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  left: 8px;
+  top: 41px;
+}
+
+.lock-icon2 {
+  top: 39px;
 }
 
 /* ----- NAVIGATION ----- */
