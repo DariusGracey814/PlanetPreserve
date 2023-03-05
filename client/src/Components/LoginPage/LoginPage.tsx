@@ -36,6 +36,8 @@ const LoginPage: React.FC = () => {
     (state: RootState) => state.FormData.errorMessage
   );
 
+  console.log(validateError);
+
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -65,13 +67,16 @@ const LoginPage: React.FC = () => {
         {/* Top Form Component */}
         <GetStarted />
         {/* Login form error message */}
-        {/* {validateError.map((error) => {
-        return (
-          <div key={validateError.indexOf(error)} className="text-red-500 para">
-            {error}
-          </div>
-        );
-      })} */}
+        {validateError.map((error) => {
+          return (
+            <div
+              key={validateError.indexOf(error)}
+              className="text-white bg-red-100 text-center para"
+            >
+              {error}
+            </div>
+          );
+        })}
         {/* Login Form */}
         <form method="post" onSubmit={submitHandler}>
           <div className="relative flex flex-col">
