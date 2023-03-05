@@ -137,10 +137,9 @@ form {
 .form-icon {
   font-size: 1rem;
   left: 10px;
-  top: 43px;
 }
 
-.form-icon2,
+.form-icon,
 .email-icon {
   top: 41px;
 }

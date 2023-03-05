@@ -33,7 +33,7 @@ const SignupPage: React.FC = () => {
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
-            <FaUserAlt className="absolute form-icon form-icon2" />
+            <FaUserAlt className="absolute form-icon" />
             <input
               type="text"
               id="InputUsername"

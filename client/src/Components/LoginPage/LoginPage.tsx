@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
-            <AiFillLock className="absolute form-icon lock-icon" />
+            <AiFillLock className="absolute lock-icon" />
             <input
               type="password"
               className="form-control border shadow-sm"
