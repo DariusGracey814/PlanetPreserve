@@ -6,12 +6,12 @@ import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
   return (
-    <section className="grid grid-2-cols">
+    <section className="hero grid grid-2-cols">
       <div
         className="hero-bg"
         aria-label="nature green graphic background with gold tree leaves "
       ></div>
-      <div>
+      <div className="form-hero">
         {/* Top Form Component */}
         <GetStarted />
         {/* Login form error message */}
@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
           </button>
 
           {/* Username and Password forgot links  */}
-          <div className="flex justify-between mt-5 underline">
+          <div className="flex justify-between mt-5 underline text-sm">
             <p>
               <Link to="/">Forgot Username</Link>
             </p>

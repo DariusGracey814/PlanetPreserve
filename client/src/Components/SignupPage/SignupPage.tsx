@@ -7,12 +7,12 @@ import GetStarted from "../UI/GetStarted/GetStarted";
 
 const SignupPage: React.FC = () => {
   return (
-    <section className="grid grid-2-cols">
+    <section className="hero grid grid-2-cols">
       <div
         className="hero-bg"
         aria-label="nature green graphic background with gold tree leaves "
       ></div>
-      <div>
+      <div className="form-hero">
         {/* Top Form Component */}
         <GetStarted />
         {/* Login form error message */}

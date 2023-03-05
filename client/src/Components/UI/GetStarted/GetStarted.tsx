@@ -8,24 +8,21 @@ const GetStarted: React.FC = () => {
     <div className="flex flex-col items-center text-center">
       {/* Image  */}
       <img
-        className="mt-5"
+        className="hero-img mt-5"
         src={logo}
         alt="planet preserve logo"
         width="130px"
         height="130px"
       />
       {/* Heading */}
-      <h1 className="form-h1 text-3xl mb-2">
-        Get started with Planet{" "}
-        <span className="content2">Preserve Login now</span>
+      <h1 className="hero-heading form-h1 text-3xl mb-2">
+        Get started with Planet Preserve Login now
       </h1>
 
       {/* Text */}
-      <p className="text-sm">
-        Track you contributions towards saving earth
-        <span className="content2">
-          while seeing what people are doing all over.
-        </span>
+      <p className="hero-para text-sm">
+        Track you contributions towards saving earth while seeing what people
+        are doing all over.
       </p>
     </div>
   );
