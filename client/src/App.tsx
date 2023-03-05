@@ -14,7 +14,7 @@ const App: React.FC = () => {
         {/* Application header */}
         <Header />
         <Routes>
-          {/* Login Page */}
+          {/* Default Page route */}
           <Route
             path="/"
             element={
@@ -23,7 +23,16 @@ const App: React.FC = () => {
               </Suspense>
             }
           />
-          {/* Sign up Page */}
+          {/* Login Page route*/}
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
+          {/* Sign up Page route */}
           <Route
             path="/signup"
             element={
