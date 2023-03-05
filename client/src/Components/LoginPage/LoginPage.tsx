@@ -1,10 +1,60 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { formDataActions } from "../../../store/forms";
+import { RootState } from "../../../store/store";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
+  // Form Input state
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const dispatch = useDispatch();
+
+  // Entered email and password stored in redux
+  const enteredUsername = useSelector(
+    (state: RootState) => state.FormData.username
+  );
+  const enteredPassword = useSelector(
+    (state: RootState) => state.FormData.password
+  );
+
+  // Valid email and password redux state
+  const validUsername = useSelector(
+    (state: RootState) => state.FormData.validUsername
+  );
+  const validPassword = useSelector(
+    (state: RootState) => state.FormData.validPassword
+  );
+
+  // Redux validate errors
+  const validateError = useSelector(
+    (state: RootState) => state.FormData.errorMessage
+  );
+
+  // Form Refs
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const submitHandler = (evt: React.FormEvent) => {
+    evt.preventDefault();
+
+    // Clear old error inputs
+    dispatch(formDataActions.setErrorMessage());
+
+    // Set state with input values
+    const username = usernameRef.current!.value;
+    const userPassword = passwordRef.current!.value;
+
+    // Send to redux store for validation
+    dispatch(formDataActions.setUsername(username));
+    dispatch(formDataActions.setPassword(userPassword));
+  };
+
   return (
     <section className="grid grid-2-cols">
       <div
@@ -23,7 +73,7 @@ const LoginPage: React.FC = () => {
         );
       })} */}
         {/* Login Form */}
-        <form method="post">
+        <form method="post" onSubmit={submitHandler}>
           <div className="relative flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
@@ -34,7 +84,7 @@ const LoginPage: React.FC = () => {
               id="InputUsername"
               className="relative form-control border shadow-sm"
               aria-describedby="username"
-              // ref={usernameRef}
+              ref={usernameRef}
               required
             />
           </div>
@@ -47,7 +97,7 @@ const LoginPage: React.FC = () => {
             <input
               type="password"
               className="form-control border shadow-sm"
-              // ref={passwordRef}
+              ref={passwordRef}
               required
             />
           </div>
