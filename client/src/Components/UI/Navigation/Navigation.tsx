@@ -26,9 +26,9 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="flex justify-end">
-      <Link className="btn nav-link text-white" to="/">
-        <button onClick={togglePage}> Sign up</button>
-      </Link>
+      <button className="btn nav-link text-white" onClick={togglePage}>
+        {!loginState ? "Signup" : "Login"}
+      </button>
     </nav>
   );
 };
