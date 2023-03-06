@@ -41,6 +41,14 @@ const App: React.FC = () => {
               </Suspense>
             }
           />
+          <Route
+            path="*"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
         </Routes>
         {/* <Container></Container> */}
       </main>
