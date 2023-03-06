@@ -127,7 +127,7 @@ const SignupPage: React.FC = () => {
             />
           </div>
 
-          <div className=" relative flex flex-col mb-3">
+          <div className=" relative flex flex-col mb-1">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>

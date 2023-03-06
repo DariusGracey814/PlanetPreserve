@@ -4,11 +4,15 @@ import { RootState } from "../../../../store/store";
 import logo from "../../../assets/tree-logo-apple.png";
 
 const GetStarted: React.FC = () => {
+  const loginState = useSelector(
+    (state: RootState) => state.FormData.loginState
+  );
+
   return (
     <div className="flex flex-col items-center text-center">
       {/* Image  */}
       <img
-        className="hero-img mt-5"
+        className={`hero-img ${!loginState ? "mt-5" : ""}`}
         src={logo}
         alt="planet preserve logo"
         width="130px"
