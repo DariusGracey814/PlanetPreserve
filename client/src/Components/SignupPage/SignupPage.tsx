@@ -41,6 +41,11 @@ const SignupPage: React.FC = () => {
   // Errors array (map into)
   const errors: string[] = Array.from(validateError);
 
+  // Clear error message on initial page load
+  useEffect(() => {
+    dispatch(formDataActions.setErrorMessage());
+  }, []);
+
   // Clear error messages after 3 seconds
   useEffect(() => {
     setTimeout(() => {

@@ -46,6 +46,7 @@ const LoginPage: React.FC = () => {
 
   // Clear error message on initial page load
   useEffect(() => {
+    dispatch(formDataActions.setErrorMessage());
     dispatch(formDataActions.clearSetIsAuthenticated());
   }, []);
 
