@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Fonts */
+  --roboto--ff: "Roboto", sans-serif;
+  --Lato--ff: "Lato", sans-serif;
+  --Oswald--ff: "Oswald", sans-serif;
+
+  /* Colors */
+  --main--green: #083e38;
+  --white-offset: #f8f8f8;
+  --tan-clr: #e6c38d;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--roboto--ff);
+}
+
+/* ----- FLEXBOX AND GRID ----- */
+.grid {
+  display: grid;
+}
+
+.grid-2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+/* ----- HEIGHT AND WIDTH ----- */
+w-100 {
+  width: 100%;
+}
+
+/* ----- MARGIN AND PADDING ----- */
+.me-10 {
+  margin-bottom: 3em;
+}
+
+.m-x-10 {
+  margin: 3em 0;
+}
+
+.pe-10 {
+  padding-bottom: 3em;
+}
+
+.main {
+  overflow: hidden;
+}
+
+/* ----- MAIN CONTAINER ----- */
+.main-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ----- HERO BACKGROUND IMAGE ----- */
+.hero-bg {
+  width: 100%;
+  height: 100vh;
+  background-image: url("./asset/HeroGraphic.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.form-hero {
+  width: 100%;
+  height: 100vh;
+  padding: 0 1em;
+}
+
+.hero-heading {
+  max-width: 400px;
+}
+
+.hero-para {
+  max-width: 300px;
+}
+
+/* ------ FORMS ------ */
+form {
+  max-width: 420px;
+  margin: 1.5em auto 3em;
+}
+
+.para {
+  max-width: 500px;
+  margin: 0.5em auto 0;
+  padding: 0.3em;
+  color: var(--main--green);
+}
+
+.form-label {
+  margin-bottom: 0.4em;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  padding: 0.5em 1.9em;
+  margin-bottom: 1em;
+  background: var(--white-offset);
+}
+
+.btn {
+  padding: 0.7em 1.6em;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-form,
+.nav-link {
+  background: var(--main--green);
+}
+
+.btn-form {
+  width: 100%;
+  margin-top: 0.5em;
+  color: #ffffff;
+}
+
+.btn-form:active,
+.btn-form:hover,
+.nav-link:hover {
+  background: #07342f;
+}
+
+.form-icon,
+.lock-icon {
+  color: var(--main--green);
+  z-index: 10;
+}
+
+.form-icon {
+  font-size: 1rem;
+  left: 10px;
+}
+
+.form-icon,
+.email-icon {
+  top: 41px;
+}
+
+.email-icon {
+  font-size: 1.1rem;
+}
+
+.lock-icon {
+  font-size: 1.2rem;
+  left: 8px;
+  top: 41px;
+}
+
+.lock-icon2 {
+  top: 39px;
+}
+
+/* ----- NAVIGATION ----- */
+.nav-link {
+  border-radius: 2em;
+  padding: 0.5em 1.5em;
+  font-size: 0.9rem;
+}
+
+/* ----- TEXT ----- */
+.content2 {
+  display: block;
+  line-height: 1;
+}
+
+/* ----- COLORS ----- */
+.clr-main {
+  color: var(--main--green);
+}
+
+/* --------- MEDIA QUERIES ---------- */
+@media (max-width: 860px) {
+  .header {
+    padding: 1em 0.8em;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-bg {
+    display: none;
+  }
+
+  .content2 {
+    display: inline-block;
+  }
+
+  .hero-img {
+    width: 110px;
+    height: 110px;
+    margin-top: 3rem;
+  }
+
+  .hero-heading {
+    font-size: 1.6rem;
+    margin-top: 0;
+    line-height: 1;
+  }
+
+  .hero-heading {
+    max-width: 300px;
+  }
+
+  .hero-heading {
+    width: 95%;
+  }
+
+  .hero-para {
+    line-height: 1.2;
+    width: 90%;
+  }
+}
