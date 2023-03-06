@@ -50,6 +50,7 @@ const LoginPage: React.FC = () => {
     dispatch(formDataActions.clearSetIsAuthenticated());
   }, []);
 
+  // Clear error messages after 3 seconds
   useEffect(() => {
     setTimeout(() => {
       dispatch(formDataActions.setErrorMessage());
