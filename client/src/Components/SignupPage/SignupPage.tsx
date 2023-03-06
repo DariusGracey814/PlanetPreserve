@@ -12,7 +12,7 @@ const SignupPage: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [errorTracker, setErrorTracker] = useState<number>(0);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -48,17 +48,15 @@ const SignupPage: React.FC = () => {
 
   // Clear error messages after 3 seconds
   useEffect(() => {
+    console.log(errorTracker);
     setTimeout(() => {
       dispatch(formDataActions.setErrorMessage());
-    }, 3000);
-  }, [errorMessage]);
+    }, 5000);
+  }, [errorTracker]);
 
   // Submit Handler
   const submitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();
-
-    // Clear old errorMessages
-    dispatch(formDataActions.setErrorMessage());
 
     // Set state with input values
     const userName = usernameRef.current!.value;
@@ -70,7 +68,7 @@ const SignupPage: React.FC = () => {
     dispatch(formDataActions.setEmail(userEmail));
     dispatch(formDataActions.setPassword(userPassword));
 
-    setErrorMessage(true);
+    setErrorTracker((prevState) => prevState + 1);
   };
 
   return (
