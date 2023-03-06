@@ -8,56 +8,71 @@ import { AiFillLock } from "react-icons/ai";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
-  // // Form Input state
-  // const [email, setEmail] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
-  // const [errorMessage, setErrorMessage] = useState<string>("");
+  // Form Input state
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
 
-  // const navigate = useNavigate();
+  // Form Refs
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // // Entered email and password stored in redux
-  // const enteredUsername = useSelector(
-  //   (state: RootState) => state.FormData.username
-  // );
-  // const enteredPassword = useSelector(
-  //   (state: RootState) => state.FormData.password
-  // );
+  // Entered email and password stored in redux
+  const enteredUsername = useSelector(
+    (state: RootState) => state.FormData.username
+  );
 
-  // // Valid email and password redux state
-  // const validUsername = useSelector(
-  //   (state: RootState) => state.FormData.validUsername
-  // );
-  // const validPassword = useSelector(
-  //   (state: RootState) => state.FormData.validPassword
-  // );
+  // Valid email and password redux state
+  const validUsername = useSelector(
+    (state: RootState) => state.FormData.validUsername
+  );
+  const validPassword = useSelector(
+    (state: RootState) => state.FormData.validPassword
+  );
 
-  // // Redux validate errors
-  // const validateError = useSelector(
-  //   (state: RootState) => state.FormData.errorMessage
-  // );
+  // Redux validate errors
+  const validateError = useSelector(
+    (state: RootState) => state.FormData.errorMessage
+  );
 
-  // console.log(validateError);
+  console.log(validateError);
 
-  // // Form Refs
-  // const usernameRef = useRef<HTMLInputElement>(null);
-  // const passwordRef = useRef<HTMLInputElement>(null);
+  const clearError = useSelector(
+    (state: RootState) => state.FormData.clearErrorMessage
+  );
 
-  // const submitHandler = (evt: React.FormEvent) => {
-  //   evt.preventDefault();
+  // Clear error message on initial page load
+  useEffect(() => {
+    dispatch(formDataActions.setErrorMessage());
+    dispatch(formDataActions.clearSetIsAuthenticated());
+  }, []);
 
-  //   // Clear old error inputs
-  //   dispatch(formDataActions.setErrorMessage());
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(formDataActions.setErrorMessage());
+    }, 3000);
+  }, [errorMessage]);
 
-  //   // Set state with input values
-  //   const username = usernameRef.current!.value;
-  //   const userPassword = passwordRef.current!.value;
+  const submitHandler = (evt: React.FormEvent) => {
+    evt.preventDefault();
 
-  //   // Send to redux store for validation
-  //   dispatch(formDataActions.setUsername(username));
-  //   dispatch(formDataActions.setPassword(userPassword));
-  // };
+    // Clear old error inputs
+    dispatch(formDataActions.setErrorMessage());
+
+    // Set state with input values
+    const username = usernameRef.current!.value;
+    const userPassword = passwordRef.current!.value;
+
+    // Send to redux store for validation
+    dispatch(formDataActions.setUsername(username));
+    dispatch(formDataActions.setPassword(userPassword));
+
+    // Start timer clearing error messages
+    setErrorMessage(true);
+  };
 
   return (
     <section className="hero grid grid-2-cols">
@@ -69,18 +84,18 @@ const LoginPage: React.FC = () => {
         {/* Top Form Component */}
         <GetStarted />
         {/* Login form error message */}
-        {/* {validateError.map((error) => {
+        {validateError.map((error) => {
           return (
             <div
               key={validateError.indexOf(error)}
-              className="text-white bg-red-100 text-center para"
+              className="text-white bg-red-200 text-center para"
             >
               {error}
             </div>
           );
-        })} */}
+        })}
         {/* Login Form */}
-        <form method="post">
+        <form method="post" onSubmit={submitHandler}>
           <div className="relative flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
@@ -91,7 +106,7 @@ const LoginPage: React.FC = () => {
               id="InputUsername"
               className="relative form-control border shadow-sm"
               aria-describedby="username"
-              // ref={usernameRef}
+              ref={usernameRef}
               required
             />
           </div>
@@ -104,7 +119,7 @@ const LoginPage: React.FC = () => {
             <input
               type="password"
               className="form-control border shadow-sm"
-              // ref={passwordRef}
+              ref={passwordRef}
               required
             />
           </div>

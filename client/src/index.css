@@ -73,7 +73,7 @@ w-100 {
 .hero-bg {
   width: 100%;
   height: 100vh;
-  background-image: url("./asset/HeroGraphic.jpg");
+  background-image: url("./assets/HeroGraphic.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -99,8 +99,9 @@ form {
 }
 
 .para {
-  max-width: 500px;
+  max-width: 400px;
   margin: 0.5em auto 0;
+  font-size: 0.8rem;
   padding: 0.3em;
   color: var(--main--green);
 }
