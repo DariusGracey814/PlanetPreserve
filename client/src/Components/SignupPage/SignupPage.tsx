@@ -70,7 +70,6 @@ const SignupPage: React.FC = () => {
     dispatch(formDataActions.setEmail(userEmail));
     dispatch(formDataActions.setPassword(userPassword));
 
-    // Start timer clearing error messages
     setErrorMessage(true);
   };
 
