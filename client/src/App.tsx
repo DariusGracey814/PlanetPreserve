@@ -48,7 +48,9 @@ const App: React.FC = () => {
             path="/dashboard"
             element={
               <Suspense fallback={<div>Loading...</div>}>
-                <Dashboard />
+                <Container>
+                  <Dashboard />
+                </Container>
               </Suspense>
             }
           />
