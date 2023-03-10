@@ -1,11 +1,12 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import Header from "./Components/UI/Header/Header";
 import Container from "./Components/UI/Container/Container";
 const LoginPage = React.lazy(() => import("./Components/LoginPage/LoginPage"));
 const SignupPage = React.lazy(
   () => import("./Components/SignupPage/SignupPage")
 );
-import Header from "./Components/UI/Header/Header";
+const Dashboard = React.lazy(() => import("./Components/Dashboard/Dashboard"));
 
 const App: React.FC = () => {
   return (
@@ -41,6 +42,17 @@ const App: React.FC = () => {
               </Suspense>
             }
           />
+
+          {/* User Dashboard route */}
+          <Route
+            path="/dashboard"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+
           <Route
             path="*"
             element={
