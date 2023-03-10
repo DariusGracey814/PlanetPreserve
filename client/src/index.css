@@ -63,9 +63,13 @@ w-100 {
 .main {
 }
 
+.border {
+  border: 2px solid red;
+}
+
 /* ----- MAIN CONTAINER ----- */
 .main-container {
-  max-width: 1500px;
+  max-width: 1459px;
   margin: 0 auto;
   border: 2px solid red;
 }
@@ -176,7 +180,7 @@ form {
 
 /* ----- DASHBOARD ----- */
 .dashboard_grid {
-  grid-template-columns: 1.5fr 3fr;
+  grid-template-columns: minmax(max-content, 420px) minmax(800px, 1fr);
 }
 
 .dashboard_nav--bg {
@@ -185,13 +189,62 @@ form {
 
 .dashboard-icon {
   color: var(--main--green);
+}
+
+.dashboard-icon {
   font-size: 1.3rem;
+}
+
+.search_icon {
+  font-size: 1.2rem;
 }
 
 .username {
   font-size: 1.4rem;
   font-family: var(--Lato--ff);
   font-weight: 500;
+}
+
+.general-text {
+  margin-top: -1em;
+}
+
+.general {
+  font-size: 1rem;
+  opacity: 0.6;
+}
+
+/* ----- Dashboard Navigation ----- */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-icon,
+.nav-text {
+  color: #ffffff;
+}
+
+.nav_icon {
+  font-size: 2rem;
+}
+
+.nav-text {
+  font-size: 1.05rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+/* ----- Search Bar ----- */
+.search input {
+  width: 100%;
+  padding: 0.2em 1em 0.2em 1.8em;
+}
+
+.search-btn {
+  top: 5px;
+  left: 5px;
 }
 
 /* ----- NAVIGATION ----- */
