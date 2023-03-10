@@ -44,41 +44,41 @@ const DashBoardNavigation: React.FC = () => {
         </div>
 
         {/* General Navigation Link */}
-        <div className="general-text mb-4">
+        <div className="general-text mb-4 ml-1">
           <p className="general text-white">GENERAL</p>
         </div>
 
         {/* Navigation Links */}
         <ul className="mb-14">
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <FaQrcode className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               Overview
             </Link>
           </li>
 
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <FaUserAlt className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               My Posts
             </Link>
           </li>
 
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <IoIosAddCircle className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               Add Posts
             </Link>
           </li>
 
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <FaEdit className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               Edit Post
             </Link>
           </li>
 
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <FaTrashAlt className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               Delete Post
@@ -87,20 +87,20 @@ const DashBoardNavigation: React.FC = () => {
         </ul>
 
         {/* Support Navigation Link */}
-        <div className="general-text mb-4">
+        <div className="general-text mb-4 ml-1">
           <p className="general text-white">SUPPORT</p>
         </div>
 
         {/* Support Navigation */}
         <ul>
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <AiFillQuestionCircle className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               Help
             </Link>
           </li>
 
-          <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4 dashboard-link">
             <BiMessage className="nav-icon" />
             <Link to="/dashboard" className="nav-text ml-4">
               Feedback
