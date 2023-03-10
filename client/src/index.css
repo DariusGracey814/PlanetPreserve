@@ -175,13 +175,23 @@ form {
 }
 
 /* ----- DASHBOARD ----- */
+.dashboard_grid {
+  grid-template-columns: 1.5fr 3fr;
+}
+
 .dashboard_nav--bg {
   background: var(--main--green);
 }
 
 .dashboard-icon {
   color: var(--main--green);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.username {
+  font-size: 1.4rem;
+  font-family: var(--Lato--ff);
+  font-weight: 500;
 }
 
 /* ----- NAVIGATION ----- */
