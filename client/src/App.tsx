@@ -13,7 +13,7 @@ const App: React.FC = () => {
     <div>
       <main>
         {/* Application header */}
-        <Header />
+        {/* <Header /> */}
         <Routes>
           {/* Default Page route */}
           <Route

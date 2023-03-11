@@ -183,6 +183,15 @@ form {
 }
 
 /* ----- DASHBOARD ----- */
+.mobile-nav {
+  font-size: 2.3rem;
+  color: var(--main--green);
+}
+
+.show_dashboard--nav {
+  display: none;
+}
+
 .dashboard_grid {
   grid-template-columns: minmax(max-content, 420px) minmax(800px, 1fr);
 }
@@ -347,6 +356,37 @@ ul {
 }
 
 /* --------- MEDIA QUERIES ---------- */
+@media (max-width: 1100px) {
+  /* DASHBOARD NAVIGATION */
+  .show_dashboard--nav {
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 10px;
+  }
+
+  .d_nav--wrapper {
+    position: absolute;
+    transition: all 0.3s ease;
+  }
+
+  .d_nav--wrapper.active {
+    position: static;
+  }
+
+  #DashboardMobileNavigation {
+    position: absolute;
+    top: 0;
+    left: -99999px;
+    transition: all 0.3s ease;
+  }
+
+  #DashboardMobileNavigation.active {
+    top: 0;
+    left: 0;
+  }
+}
+
 @media (max-width: 860px) {
   .header {
     padding: 1em 0.8em;
