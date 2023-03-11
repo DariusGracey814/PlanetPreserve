@@ -15,7 +15,7 @@
   /* Colors */
   --main--green: #083e38;
   --main--tint: #21514c;
-  --white-offset: #f8f8f8;
+  --white-offset: #f5f5f5;
   --tan-clr: #e6c38d;
 }
 
@@ -33,6 +33,10 @@ body {
 
 .grid-2-cols {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3-cols {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .flex {
@@ -263,6 +267,72 @@ ul {
   border-radius: 2em;
   padding: 0.5em 1.5em;
   font-size: 0.9rem;
+}
+
+/* ------ Dashboard Main Component ----- */
+.stat_wrapper {
+  gap: 1.5rem;
+}
+
+.stats-bg {
+  background: var(--white-offset);
+}
+
+.stat-h1,
+.stat-h2,
+.stat-counter {
+  color: var(--main--green);
+}
+
+.stat-h1 {
+  color: var(--main--green);
+  font-family: var(--Oswald--ff);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.stat-h2,
+.stat-counter {
+  max-width: 170px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.stat-h2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.stat-counter {
+  font-family: var(--Oswald--ff);
+  font-size: 1rem;
+  margin-top: 0.2em;
+}
+
+.star-icon {
+  color: var(--main--green);
+  font-size: 1.5rem;
+}
+
+.stat-icon {
+  color: var(--main--green);
+  font-size: 1.6rem;
+}
+
+.stat-icon--user {
+  color: var(--main--green);
+  font-size: 1.4rem;
+}
+
+.stat-counter,
+.stat-icon,
+.stat-icon--user,
+.star-icon {
+  margin-bottom: 0.2em;
 }
 
 /* ----- TEXT ----- */

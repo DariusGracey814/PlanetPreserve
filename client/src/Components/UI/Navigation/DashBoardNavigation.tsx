@@ -33,7 +33,7 @@ const DashBoardNavigation: React.FC = () => {
         <div>
           <form className="relative search">
             <input
-              className="rounded-lg"
+              className="rounded-lg shadow-md"
               type="text"
               placeholder="Quick Find"
             />
