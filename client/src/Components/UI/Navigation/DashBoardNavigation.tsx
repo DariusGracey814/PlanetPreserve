@@ -8,25 +8,24 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import { AiOutlineSearch, AiFillQuestionCircle } from "react-icons/ai";
-import { BiMessage, BiMenuAltLeft } from "react-icons/bi";
+import { BiMessage, BiMenuAltLeft, BiLogOutCircle } from "react-icons/bi";
 import { IoIosAddCircle } from "react-icons/io";
 
 const DashBoardNavigation: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
 
   return (
-    <>
-      <div className="d_nav--wrapper border">
-        {/* Mobile Navigation */}
-        <button
-          className="show_dashboard--nav"
-          aria-controls="DashboardMobileNavigation"
-          aria-expanded={`${expanded}`}
-          aria-label="mobile navigation"
-        >
-          <BiMenuAltLeft className="mobile-nav" />
-        </button>
-      </div>
+    <div className="d_nav--wrapper border">
+      {/* Mobile Navigation */}
+      <button
+        className="show_dashboard--nav"
+        aria-controls="DashboardMobileNavigation"
+        aria-expanded={`${expanded}`}
+        aria-label="mobile navigation"
+      >
+        <BiMenuAltLeft className="mobile-nav" />
+      </button>
+
       <aside
         id="DashboardMobileNavigation"
         className="dashboard_nav--bg h-screen"
@@ -77,28 +76,35 @@ const DashBoardNavigation: React.FC = () => {
             <li className="flex items-center mb-4 dashboard-link">
               <FaUserAlt className="nav-icon" />
               <Link to="/dashboard" className="nav-text ml-4">
-                My Posts
+                My Contributions
               </Link>
             </li>
 
             <li className="flex items-center mb-4 dashboard-link">
               <IoIosAddCircle className="nav-icon" />
               <Link to="/dashboard" className="nav-text ml-4">
-                Add Posts
+                Add Contribution
               </Link>
             </li>
 
             <li className="flex items-center mb-4 dashboard-link">
               <FaEdit className="nav-icon" />
               <Link to="/dashboard" className="nav-text ml-4">
-                Edit Post
+                Edit Contribution
               </Link>
             </li>
 
             <li className="flex items-center mb-4 dashboard-link">
               <FaTrashAlt className="nav-icon" />
               <Link to="/dashboard" className="nav-text ml-4">
-                Delete Post
+                Delete Contribution
+              </Link>
+            </li>
+
+            <li className="flex items-center mb-4 dashboard-link">
+              <BiLogOutCircle className="nav-icon" />
+              <Link to="/dashboard" className="nav-text ml-4">
+                Logout
               </Link>
             </li>
           </ul>
@@ -126,7 +132,7 @@ const DashBoardNavigation: React.FC = () => {
           </ul>
         </nav>
       </aside>
-    </>
+    </div>
   );
 };
 

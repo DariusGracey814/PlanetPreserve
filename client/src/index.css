@@ -364,27 +364,6 @@ ul {
     top: 3px;
     left: 10px;
   }
-
-  .d_nav--wrapper {
-    position: absolute;
-    transition: all 0.3s ease;
-  }
-
-  .d_nav--wrapper.active {
-    position: static;
-  }
-
-  #DashboardMobileNavigation {
-    position: absolute;
-    top: 0;
-    left: -99999px;
-    transition: all 0.3s ease;
-  }
-
-  #DashboardMobileNavigation.active {
-    top: 0;
-    left: 0;
-  }
 }
 
 @media (max-width: 860px) {

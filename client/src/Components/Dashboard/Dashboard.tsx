@@ -8,9 +8,11 @@ const Dashboard: React.FC = () => {
   return (
     <section className="grid dashboard_grid w-screen h-screen">
       <DashBoardNavigation />
-      <div className="px-5 py-4">
+
+      {/* DASHBOARD  */}
+      <div className="px-5 py-4 border">
         {/* Contributions Stats (current eco contributions, world eco contributes, stars 1 = 1 contribution) */}
-        <div className="dashboard_container flex justify-between">
+        <div className="dashboard_container flex justify-between border">
           <h1 className="stat-h1">Overview</h1>
           {/* Contribution bucket 1 */}
           <div className="stat_wrapper grid grid-3-cols">
