@@ -85,6 +85,7 @@ w-100 {
   background-image: url("./assets/HeroGraphic.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .form-hero {
