@@ -25,6 +25,12 @@ const LoginPage: React.FC = () => {
     (state: RootState) => state.FormData.username
   );
 
+  const enteredPassword = useSelector(
+    (state: RootState) => state.FormData.password
+  );
+
+  console.log(enteredUsername, enteredPassword);
+
   // Valid email and password redux state
   const validUsername = useSelector(
     (state: RootState) => state.FormData.validUsername
