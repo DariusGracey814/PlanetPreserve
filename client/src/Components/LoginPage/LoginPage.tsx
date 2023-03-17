@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { fetchUsers } from "../../../api/LoginAuthApiService";
 import { useDispatch, useSelector } from "react-redux";
 import { formDataActions } from "../../../store/forms";
-import { RootState } from "../../../store/store";
+import { AppDispatch, RootState } from "../../../store/store";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const LoginPage: React.FC = () => {
   // Form Input state
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [errorTracker, setErrorTracker] = useState<number>(0);
+  const [users, setUsers] = useState<
+    { id: number; username: string; email: string; password: string }[]
+  >([]);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // Entered email and password stored in redux
   const enteredUsername = useSelector(
@@ -29,7 +31,7 @@ const LoginPage: React.FC = () => {
     (state: RootState) => state.FormData.password
   );
 
-  console.log(enteredUsername, enteredPassword);
+  console.log(users);
 
   // Valid email and password redux state
   const validUsername = useSelector(
@@ -62,6 +64,17 @@ const LoginPage: React.FC = () => {
       dispatch(formDataActions.setErrorMessage());
     }, 5000);
   }, [errorTracker]);
+
+  // Fetches users
+  useEffect(() => {
+    dispatch(fetchUsers(enteredUsername))
+      .then((res) => {
+        setUsers(res.payload);
+      })
+      .catch((err) => {
+        return err?.message;
+      });
+  }, [enteredUsername, enteredPassword]);
 
   const submitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();
