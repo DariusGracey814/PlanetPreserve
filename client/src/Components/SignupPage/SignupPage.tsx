@@ -29,8 +29,15 @@ const SignupPage: React.FC = () => {
   const enteredUsername = useSelector(
     (state: RootState) => state.FormData.username
   );
-  const enteredRePassword = useSelector(
-    (state: RootState) => state.FormData.rePassword
+
+  const validEmail = useSelector(
+    (state: RootState) => state.FormData.validEmail
+  );
+  const validUsername = useSelector(
+    (state: RootState) => state.FormData.validUsername
+  );
+  const validPassword = useSelector(
+    (state: RootState) => state.FormData.validPassword
   );
 
   // Redux validate state
@@ -53,6 +60,8 @@ const SignupPage: React.FC = () => {
       dispatch(formDataActions.setErrorMessage());
     }, 5000);
   }, [errorTracker]);
+
+  // Check if user is valid after click
 
   // Submit Handler
   const submitHandler = (evt: React.FormEvent) => {
