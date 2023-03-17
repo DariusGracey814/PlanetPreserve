@@ -3,5 +3,6 @@
 /client/node_modules
 /client/store
 /client/utils
+/client/api
 server
 
