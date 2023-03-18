@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./Components/UI/Header/Header";
 import Container from "./Components/UI/Container/Container";
 const LoginPage = React.lazy(() => import("./Components/LoginPage/LoginPage"));
@@ -13,17 +13,10 @@ const App: React.FC = () => {
     <div>
       <main>
         {/* Application header */}
-        {/* <Header /> */}
+        <Header />
         <Routes>
           {/* Default Page route */}
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
+          <Route path="/" element={<Navigate to="/login" />} />
           {/* Login Page route*/}
           <Route
             path="/login"

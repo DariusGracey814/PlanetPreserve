@@ -23,6 +23,10 @@ const LoginPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   // Entered email and password stored in redux
+  const registeredUser = useSelector(
+    (state: RootState) => state.FormData.successMessage
+  );
+
   const enteredUsername = useSelector(
     (state: RootState) => state.FormData.username
   );
@@ -30,8 +34,6 @@ const LoginPage: React.FC = () => {
   const enteredPassword = useSelector(
     (state: RootState) => state.FormData.password
   );
-
-  console.log(users);
 
   // Valid email and password redux state
   const validUsername = useSelector(
@@ -45,8 +47,6 @@ const LoginPage: React.FC = () => {
   const validateError = useSelector(
     (state: RootState) => state.FormData.errorMessage
   );
-
-  console.log(validateError);
 
   const clearError = useSelector(
     (state: RootState) => state.FormData.clearErrorMessage
@@ -62,8 +62,9 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(formDataActions.setErrorMessage());
+      dispatch(formDataActions.clearSuccessMessage());
     }, 5000);
-  }, [errorTracker]);
+  }, [errorTracker, registeredUser]);
 
   // Fetches users
   useEffect(() => {
@@ -100,6 +101,12 @@ const LoginPage: React.FC = () => {
       <div className="form-hero">
         {/* Top Form Component */}
         <GetStarted />
+        {/* Successful user registration */}
+        {registeredUser !== "" ? (
+          <div className="text-white bg-green-200 text-center para">
+            {registeredUser}
+          </div>
+        ) : null}
         {/* Login form error message */}
         {validateError.map((error) => {
           return (

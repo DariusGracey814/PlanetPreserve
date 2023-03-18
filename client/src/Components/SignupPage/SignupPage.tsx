@@ -89,6 +89,11 @@ const SignupPage: React.FC = () => {
           if (response) {
             console.log(response);
             setRes("User successfully sent to the server");
+            dispatch(
+              formDataActions.setSuccessMessage(
+                "Registration successful. You can now login"
+              )
+            );
             // If success navigate to the login page
             setTimeout(() => {
               navigate("/login");
