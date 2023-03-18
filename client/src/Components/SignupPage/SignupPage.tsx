@@ -1,25 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { formDataActions } from "../../../store/forms";
-import { RootState } from "../../../store/store";
+import { sendUser } from "../../../api/SignupAuthApiService";
+import { AppDispatch, RootState } from "../../../store/store";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import GetStarted from "../UI/GetStarted/GetStarted";
 
 const SignupPage: React.FC = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [res, setRes] = useState<string>(
+    "Waiting to send registering user to server"
+  );
   const [errorTracker, setErrorTracker] = useState<number>(0);
+  const [btnClick, setBtnClick] = useState<number>(0);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   // Entered email and password stored in redux
   const enteredEmail = useSelector((state: RootState) => state.FormData.email);
@@ -29,6 +32,10 @@ const SignupPage: React.FC = () => {
   const enteredUsername = useSelector(
     (state: RootState) => state.FormData.username
   );
+
+  console.log(enteredEmail);
+  console.log(enteredUsername);
+  console.log(enteredPassword);
 
   const validEmail = useSelector(
     (state: RootState) => state.FormData.validEmail
@@ -48,6 +55,8 @@ const SignupPage: React.FC = () => {
   // Errors array (map into)
   const errors: string[] = Array.from(validateError);
 
+  console.log(res);
+
   // Clear error message on initial page load
   useEffect(() => {
     dispatch(formDataActions.setErrorMessage());
@@ -61,7 +70,36 @@ const SignupPage: React.FC = () => {
     }, 5000);
   }, [errorTracker]);
 
-  // Check if user is valid after click
+  // Send registering user credentials to backend
+  useEffect(() => {
+    const registeredUser: {
+      email: string;
+      username: string;
+      password: string;
+    } = {
+      email: enteredEmail,
+      username: enteredUsername,
+      password: enteredPassword,
+    };
+
+    // If user fields are valid
+    if (validEmail && validPassword && validUsername) {
+      dispatch(sendUser(registeredUser))
+        .then((response) => {
+          if (response) {
+            console.log(response);
+            setRes("User successfully sent to the server");
+            // If success navigate to the login page
+            setTimeout(() => {
+              navigate("/login");
+            }, 1000);
+          }
+        })
+        .catch((error) => error?.message);
+    } else {
+      setRes("Credentials are invalid");
+    }
+  }, [btnClick]);
 
   // Submit Handler
   const submitHandler = (evt: React.FormEvent) => {
@@ -78,6 +116,7 @@ const SignupPage: React.FC = () => {
     dispatch(formDataActions.setPassword(userPassword));
 
     setErrorTracker((prevState) => prevState + 1);
+    setBtnClick((prevClick) => prevClick + 1);
   };
 
   return (
