@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchUsers } from "../../../api/LoginAuthApiService";
+import { fetchUser } from "../../../api/LoginAuthApiService";
 import { useDispatch, useSelector } from "react-redux";
 import { formDataActions } from "../../../store/forms";
 import { AppDispatch, RootState } from "../../../store/store";
@@ -11,9 +11,12 @@ import GetStarted from "../UI/GetStarted/GetStarted";
 const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
-  const [users, setUsers] = useState<
-    { id: number; username: string; email: string; password: string }[]
-  >([]);
+  const [user, setUser] = useState<{
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+  }>({ id: 0, username: "", email: "", password: "" });
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -21,6 +24,8 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+
+  console.log(user);
 
   // Entered email and password stored in redux
   const registeredUser = useSelector(
@@ -56,6 +61,9 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     dispatch(formDataActions.setErrorMessage());
     dispatch(formDataActions.clearSetIsAuthenticated());
+    dispatch(formDataActions.setValidEmail(false));
+    dispatch(formDataActions.setValidUsername(false));
+    dispatch(formDataActions.setValidPassword(false));
   }, []);
 
   // Clear error messages after 3 seconds
@@ -68,14 +76,22 @@ const LoginPage: React.FC = () => {
 
   // Fetches users
   useEffect(() => {
-    dispatch(fetchUsers(enteredUsername))
-      .then((res) => {
-        setUsers(res.payload);
-      })
-      .catch((err) => {
-        return err?.message;
-      });
-  }, [enteredUsername, enteredPassword]);
+    if (validUsername && validPassword) {
+      // User validated credentials
+      const user: { username: string; password: string } = {
+        username: enteredUsername,
+        password: enteredPassword,
+      };
+
+      dispatch(fetchUser(user))
+        .then((res) => {
+          setUser(res.payload);
+        })
+        .catch((err) => {
+          return err?.message;
+        });
+    }
+  }, [validUsername, validateError]);
 
   const submitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();

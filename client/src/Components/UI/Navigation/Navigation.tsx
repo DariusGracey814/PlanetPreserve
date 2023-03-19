@@ -1,20 +1,16 @@
 import React, { FormEvent, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { formDataActions } from "../../../../store/forms";
 import { RootState } from "../../../../store/store";
 
 const Navigation: React.FC = () => {
-  const [toggleNav, setToggleNav] = useState<boolean>(true);
+  const [toggleNav, setToggleNav] = useState<boolean>(false);
 
   console.log(toggleNav);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setToggleNav(true);
-  }, []);
 
   useEffect(() => {
     navigate(toggleNav ? "/login" : "/signup");
@@ -29,18 +25,13 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="flex justify-end">
-      <Link
-        to={toggleNav ? "/login" : "/signup"}
+      <button
         className="btn nav-link text-white"
-      >
-        <button onClick={toggleLogin}>Signup</button>
-      </Link>
-      {/* <button
         aria-label={`${toggleNav ? "Login button" : "Sign Up button"}`}
         onClick={toggleLogin}
       >
-        {toggleNav ? "Login" : }
-      </button> */}
+        {toggleNav ? "Login" : "Signup"}
+      </button>
     </nav>
   );
 };
