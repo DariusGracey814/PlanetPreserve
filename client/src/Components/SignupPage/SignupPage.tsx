@@ -14,7 +14,6 @@ const SignupPage: React.FC = () => {
     "Waiting to send registering user to server"
   );
   const [errorTracker, setErrorTracker] = useState<number>(0);
-  const [btnClick, setBtnClick] = useState<number>(0);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -32,10 +31,6 @@ const SignupPage: React.FC = () => {
   const enteredUsername = useSelector(
     (state: RootState) => state.FormData.username
   );
-
-  console.log(enteredEmail);
-  console.log(enteredUsername);
-  console.log(enteredPassword);
 
   const validEmail = useSelector(
     (state: RootState) => state.FormData.validEmail
@@ -72,39 +67,42 @@ const SignupPage: React.FC = () => {
 
   // Send registering user credentials to backend
   useEffect(() => {
-    const registeredUser: {
-      email: string;
-      username: string;
-      password: string;
-    } = {
-      email: enteredEmail,
-      username: enteredUsername,
-      password: enteredPassword,
-    };
-
     // If user fields are valid
     if (validEmail && validPassword && validUsername) {
+      const registeredUser: {
+        email: string;
+        username: string;
+        password: string;
+      } = {
+        email: enteredEmail,
+        username: enteredUsername,
+        password: enteredPassword,
+      };
+
       dispatch(sendUser(registeredUser))
         .then((response) => {
-          if (response) {
-            console.log(response);
-            setRes("User successfully sent to the server");
-            dispatch(
-              formDataActions.setSuccessMessage(
-                "Registration successful. You can now login"
-              )
-            );
-            // If success navigate to the login page
-            setTimeout(() => {
-              navigate("/login");
-            }, 1000);
-          }
+          setRes("User successfully sent to the server");
+          dispatch(
+            formDataActions.setSuccessMessage(
+              "Registration successful. You can now login"
+            )
+          );
+          console.log(response);
+          // If success navigate to the login page
+          setTimeout(() => {
+            navigate("/login");
+          }, 1000);
+
+          // reset valid fields on load
+          dispatch(formDataActions.setValidEmail(false));
+          dispatch(formDataActions.setValidUsername(false));
+          dispatch(formDataActions.setValidPassword(false));
         })
         .catch((error) => error?.message);
     } else {
       setRes("Credentials are invalid");
     }
-  }, [btnClick]);
+  }, [validEmail, validPassword, validUsername]);
 
   // Submit Handler
   const submitHandler = (evt: React.FormEvent) => {
@@ -121,7 +119,6 @@ const SignupPage: React.FC = () => {
     dispatch(formDataActions.setPassword(userPassword));
 
     setErrorTracker((prevState) => prevState + 1);
-    setBtnClick((prevClick) => prevClick + 1);
   };
 
   return (

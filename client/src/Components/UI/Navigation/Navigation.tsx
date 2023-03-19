@@ -1,32 +1,46 @@
-import React, { FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { FormEvent, useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { formDataActions } from "../../../../store/forms";
 import { RootState } from "../../../../store/store";
 
 const Navigation: React.FC = () => {
+  const [toggleNav, setToggleNav] = useState<boolean>(true);
+
+  console.log(toggleNav);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const loginState = useSelector(
-    (state: RootState) => state.FormData.loginState
-  );
+  useEffect(() => {
+    setToggleNav(true);
+  }, []);
+
+  useEffect(() => {
+    navigate(toggleNav ? "/login" : "/signup");
+  }, [toggleNav]);
 
   const toggleLogin = (evt: FormEvent) => {
     evt.preventDefault();
-    dispatch(formDataActions.setLoginState());
-    navigate(`${!loginState ? "/signup" : "/login"}`);
+
+    // Toggle login menu
+    setToggleNav((prevState) => !prevState);
   };
 
   return (
     <nav className="flex justify-end">
-      <button
+      <Link
+        to={toggleNav ? "/login" : "/signup"}
         className="btn nav-link text-white"
-        aria-label={`${!loginState ? "Sign Up button" : "Login button"}`}
+      >
+        <button onClick={toggleLogin}>Signup</button>
+      </Link>
+      {/* <button
+        aria-label={`${toggleNav ? "Login button" : "Sign Up button"}`}
         onClick={toggleLogin}
       >
-        {!loginState ? "Sign up" : "Login"}
-      </button>
+        {toggleNav ? "Login" : }
+      </button> */}
     </nav>
   );
 };
