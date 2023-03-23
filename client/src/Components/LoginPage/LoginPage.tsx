@@ -11,12 +11,8 @@ import GetStarted from "../UI/GetStarted/GetStarted";
 const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
-  const [user, setUser] = useState<{
-    id: number;
-    username: string;
-    email: string;
-    password: string;
-  }>({ id: 0, username: "", email: "", password: "" });
+  const [user, setUser] = useState<boolean>(false);
+  const [formSubmitTracker, setFormSubmitTracker] = useState<number>(0);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -91,7 +87,7 @@ const LoginPage: React.FC = () => {
           return err?.message;
         });
     }
-  }, [validUsername, validateError]);
+  }, [formSubmitTracker]);
 
   const submitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();
@@ -106,6 +102,7 @@ const LoginPage: React.FC = () => {
 
     // Start timer clearing error messages
     setErrorTracker((prevState) => prevState + 1);
+    setFormSubmitTracker((prevState) => prevState + 1);
   };
 
   return (
