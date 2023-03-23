@@ -1,14 +1,19 @@
 import React, { Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Header from "./Components/UI/Header/Header";
 import Container from "./Components/UI/Container/Container";
-const LoginPage = React.lazy(() => import("./Components/LoginPage/LoginPage"));
-const SignupPage = React.lazy(
-  () => import("./Components/SignupPage/SignupPage")
-);
+import { RootState } from "../store/store";
+import LoginPage from "./Components/LoginPage/LoginPage";
+import SignupPage from "./Components/SignupPage/SignupPage";
 const Dashboard = React.lazy(() => import("./Components/Dashboard/Dashboard"));
 
 const App: React.FC = () => {
+  // user authentication state
+  const authenticated = useSelector(
+    (state: RootState) => state.AuthSlice.authenticatedUser
+  );
+
   return (
     <div>
       <main>
@@ -18,27 +23,13 @@ const App: React.FC = () => {
           {/* Default Page route */}
           <Route path="/" element={<Navigate to="/login" />} />
           {/* Login Page route*/}
-          <Route
-            path="/login"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
+          <Route path="/login" element={<LoginPage />} />
           {/* Sign up Page route */}
-          <Route
-            path="/signup"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <SignupPage />
-              </Suspense>
-            }
-          />
+          <Route path="/signup" element={<SignupPage />} />
 
           {/* User Dashboard route */}
           <Route
-            path="/dashboard"
+            path={`${!authenticated ? "/login" : "/dashboard"}`}
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Container>
