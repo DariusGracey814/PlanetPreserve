@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { fetchUser } from "../../../api/LoginAuthApiService";
 import { useDispatch, useSelector } from "react-redux";
 import { formDataActions } from "../../../store/forms";
+import { AuthSliceActions } from "../../../store/auth";
 import { AppDispatch, RootState } from "../../../store/store";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
@@ -11,7 +12,6 @@ import GetStarted from "../UI/GetStarted/GetStarted";
 const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
-  const [user, setUser] = useState<boolean>(false);
   const [formSubmitTracker, setFormSubmitTracker] = useState<number>(0);
 
   // Form Refs
@@ -20,8 +20,6 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-
-  console.log(user);
 
   // Entered email and password stored in redux
   const registeredUser = useSelector(
@@ -81,7 +79,8 @@ const LoginPage: React.FC = () => {
 
       dispatch(fetchUser(user))
         .then((res) => {
-          setUser(res.payload);
+          // send auth status to redux auth
+          dispatch(AuthSliceActions.setAuthState(res.payload));
         })
         .catch((err) => {
           return err?.message;
