@@ -225,7 +225,7 @@ const SignupPage: React.FC = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="btn btn-form"
+            className={`btn btn-form ${loadState ? "hide" : ""}`}
             disabled={loadState ? true : false}
           >
             Sign up

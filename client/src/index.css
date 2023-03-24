@@ -443,3 +443,7 @@ ul {
 .input-blur {
   filter: blur(2px);
 }
+
+.hide {
+  opacity: 0.2;
+}

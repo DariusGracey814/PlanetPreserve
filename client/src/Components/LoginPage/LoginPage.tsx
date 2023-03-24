@@ -8,12 +8,13 @@ import { AppDispatch, RootState } from "../../../store/store";
 import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import GetStarted from "../UI/GetStarted/GetStarted";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
   const [formSubmitTracker, setFormSubmitTracker] = useState<number>(0);
-  const [loginError, setLoginError] = useState<string>("");
+  const [loadState, setLoadState] = useState<boolean>(false);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -76,6 +77,9 @@ const LoginPage: React.FC = () => {
   // Fetches users
   useEffect(() => {
     if (validUsername && validPassword) {
+      // Set Load state
+      setLoadState(true);
+
       // User validated credentials
       const user: { username: string; password: string } = {
         username: enteredUsername,
@@ -86,6 +90,7 @@ const LoginPage: React.FC = () => {
         .then((res) => {
           // send auth status to redux auth
           dispatch(AuthSliceActions.setAuthState(res.payload));
+          setLoadState(false);
         })
         .catch((err) => {
           return err?.message;
@@ -97,6 +102,7 @@ const LoginPage: React.FC = () => {
   useEffect(() => {
     if (authenticated) {
       navigate("/dashboard");
+      setLoadState(false);
     }
   }, [authenticated]);
 
@@ -149,8 +155,14 @@ const LoginPage: React.FC = () => {
           </div>
         ) : null}
         {/* Login Form */}
-        <form method="post" onSubmit={submitHandler}>
-          <div className="relative flex flex-col">
+        <form method="post" onSubmit={submitHandler} className="relative">
+          {loadState ? <LoadingSpinner /> : null}
+
+          <div
+            className={`relative flex flex-col ${
+              loadState ? "input-blur" : ""
+            }`}
+          >
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
@@ -162,11 +174,16 @@ const LoginPage: React.FC = () => {
               aria-describedby="username"
               ref={usernameRef}
               name="username"
+              readOnly={loadState ? true : false}
               required
             />
           </div>
 
-          <div className="relative flex flex-col mb-5">
+          <div
+            className={`relative flex flex-col mb-5 ${
+              loadState ? "input-blur" : ""
+            }`}
+          >
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
@@ -175,12 +192,17 @@ const LoginPage: React.FC = () => {
               type="password"
               className="form-control border shadow-sm"
               ref={passwordRef}
+              readOnly={loadState ? true : false}
               required
             />
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn btn-form">
+          <button
+            type="submit"
+            className="btn btn-form"
+            disabled={loadState ? true : false}
+          >
             Login
           </button>
 
