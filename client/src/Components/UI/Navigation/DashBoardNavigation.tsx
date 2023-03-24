@@ -103,7 +103,7 @@ const DashBoardNavigation: React.FC = () => {
 
             <li className="flex items-center mb-4 dashboard-link">
               <BiLogOutCircle className="nav-icon" />
-              <Link to="/dashboard" className="nav-text ml-4">
+              <Link to="/planet-preserve/login" className="nav-text ml-4">
                 Logout
               </Link>
             </li>

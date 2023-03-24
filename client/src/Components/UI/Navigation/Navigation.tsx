@@ -11,7 +11,7 @@ const Navigation: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(toggleNav ? "/signup" : "/login");
+    navigate(toggleNav ? "/planet-preserve/signup" : "/planet-preserve/login");
   }, [toggleNav]);
 
   const toggleLogin = (evt: FormEvent) => {

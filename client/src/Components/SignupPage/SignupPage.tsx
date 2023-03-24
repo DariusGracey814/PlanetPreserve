@@ -95,7 +95,7 @@ const SignupPage: React.FC = () => {
           console.log(response);
           // If success navigate to the login page
           setTimeout(() => {
-            navigate("/login");
+            navigate("/planet-preserve/signup");
             setLoadState(false);
           }, 1000);
 

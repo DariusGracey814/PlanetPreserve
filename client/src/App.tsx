@@ -21,15 +21,19 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           {/* Default Page route */}
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Navigate to="/planet-preserve/login" />} />
           {/* Login Page route*/}
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/planet-preserve/login" element={<LoginPage />} />
           {/* Sign up Page route */}
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/planet-preserve/signup" element={<SignupPage />} />
 
           {/* User Dashboard route */}
           <Route
-            path={`${!authenticated ? "/login" : "/dashboard"}`}
+            path={`${
+              !authenticated
+                ? "/planet-preserve/login"
+                : "/planet-preserve/dashboard"
+            }`}
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Container>
