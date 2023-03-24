@@ -65,13 +65,6 @@ w-100 {
   padding-bottom: 3em;
 }
 
-.main {
-}
-
-.border {
-  border: 2px solid red;
-}
-
 /* ----- MAIN CONTAINER ----- */
 .main-container {
   max-width: 1459px;
@@ -412,9 +405,6 @@ ul {
 
 /* ----- LOADING SPINNER ----- */
 .container {
-  width: 100%;
-  height: 100vh;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -422,20 +412,23 @@ ul {
 
 .spinner {
   display: inline-block;
+  left: 50%;
+  bottom: 50%;
   width: 44px;
   height: 44px;
+  z-index: 100;
 }
 
 .spinner:after {
   content: " ";
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   margin: 8px;
   border-radius: 50%;
   border: 6px solid var(--main--green);
   border-color: var(--main--green) transparent var(--main--green) transparent;
-  animation: spinner 1.2s linear infinite;
+  animation: spinner 1.5s linear infinite;
 }
 @keyframes spinner {
   0% {
@@ -444,4 +437,9 @@ ul {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Form blur when adding data to db */
+.input-blur {
+  filter: blur(2px);
 }

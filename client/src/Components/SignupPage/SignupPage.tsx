@@ -8,12 +8,14 @@ import { FaUserAlt } from "react-icons/fa";
 import { AiFillLock } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import GetStarted from "../UI/GetStarted/GetStarted";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const SignupPage: React.FC = () => {
   const [res, setRes] = useState<string>(
     "Waiting to send registering user to server"
   );
   const [errorTracker, setErrorTracker] = useState<number>(0);
+  const [loadState, setLoadState] = useState<boolean>(false);
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -69,6 +71,9 @@ const SignupPage: React.FC = () => {
   useEffect(() => {
     // If user fields are valid
     if (validEmail && validPassword && validUsername) {
+      // Set load state = true
+      setLoadState(true);
+
       const registeredUser: {
         email: string;
         username: string;
@@ -91,6 +96,7 @@ const SignupPage: React.FC = () => {
           // If success navigate to the login page
           setTimeout(() => {
             navigate("/login");
+            setLoadState(false);
           }, 1000);
 
           // reset valid fields on load
@@ -142,9 +148,15 @@ const SignupPage: React.FC = () => {
           );
         })}
         {/* Login Form */}
-        <form method="post" onSubmit={submitHandler}>
+        <form method="post" onSubmit={submitHandler} className="relative">
+          {loadState ? <LoadingSpinner /> : null}
+
           {/* Username */}
-          <div className="relative flex flex-col">
+          <div
+            className={`relative flex flex-col ${
+              loadState ? "input-blur" : ""
+            }`}
+          >
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
@@ -152,15 +164,22 @@ const SignupPage: React.FC = () => {
             <input
               type="text"
               id="InputUsername"
-              className="relative form-control border shadow-sm"
+              className={`relative form-control border shadow-sm ${
+                loadState ? "input-blur" : ""
+              }`}
               aria-describedby="username"
               ref={usernameRef}
+              readOnly={loadState ? true : false}
               required
             />
           </div>
 
           {/* Email Address */}
-          <div className="relative flex flex-col">
+          <div
+            className={`relative flex flex-col ${
+              loadState ? "input-blur" : ""
+            }`}
+          >
             <label htmlFor="InputEmail" className="form-label">
               Email
             </label>
@@ -171,11 +190,16 @@ const SignupPage: React.FC = () => {
               className="relative form-control border shadow-sm"
               aria-describedby="email"
               ref={emailRef}
+              readOnly={loadState ? true : false}
               required
             />
           </div>
 
-          <div className=" relative flex flex-col mb-1">
+          <div
+            className={`relative flex flex-col mb-1 ${
+              loadState ? "input-blur" : ""
+            }`}
+          >
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
@@ -184,19 +208,26 @@ const SignupPage: React.FC = () => {
               type="password"
               className="form-control border shadow-sm"
               ref={passwordRef}
+              readOnly={loadState ? true : false}
               required
             />
           </div>
           {/* Username and Password forgot links  */}
           <div>
-            <p className="text-center text-sm">
+            <p
+              className={`text-center text-sm ${loadState ? "input-blur" : ""}`}
+            >
               By clicking sign up you agree with the{" "}
               <span className="underline clr-main">terms and services</span>
             </p>
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn btn-form">
+          <button
+            type="submit"
+            className="btn btn-form"
+            disabled={loadState ? true : false}
+          >
             Sign up
           </button>
         </form>
