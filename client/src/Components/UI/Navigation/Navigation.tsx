@@ -7,13 +7,11 @@ import { RootState } from "../../../../store/store";
 const Navigation: React.FC = () => {
   const [toggleNav, setToggleNav] = useState<boolean>(false);
 
-  console.log(toggleNav);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate(toggleNav ? "/login" : "/signup");
+    navigate(toggleNav ? "/signup" : "/login");
   }, [toggleNav]);
 
   const toggleLogin = (evt: FormEvent) => {
@@ -27,10 +25,10 @@ const Navigation: React.FC = () => {
     <nav className="flex justify-end">
       <button
         className="btn nav-link text-white"
-        aria-label={`${toggleNav ? "Login button" : "Sign Up button"}`}
+        aria-label={`${!toggleNav ? "Sign Up button" : "Login button"}`}
         onClick={toggleLogin}
       >
-        {toggleNav ? "Login" : "Signup"}
+        {!toggleNav ? "Signup" : "Login"}
       </button>
     </nav>
   );

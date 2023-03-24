@@ -13,6 +13,7 @@ const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
   const [formSubmitTracker, setFormSubmitTracker] = useState<number>(0);
+  const [loginError, setLoginError] = useState<string>("");
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -20,6 +21,10 @@ const LoginPage: React.FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+
+  const authenticated = useSelector(
+    (state: RootState) => state.AuthSlice.authenticatedUser
+  );
 
   // Entered email and password stored in redux
   const registeredUser = useSelector(
@@ -88,6 +93,13 @@ const LoginPage: React.FC = () => {
     }
   }, [formSubmitTracker]);
 
+  // Navigate to dashboard if user is authenicated
+  useEffect(() => {
+    if (authenticated) {
+      navigate("/dashboard");
+    }
+  }, [authenticated]);
+
   const submitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();
 
@@ -130,6 +142,12 @@ const LoginPage: React.FC = () => {
             </div>
           );
         })}
+        {/* Login form invalid user error */}
+        {authenticated === false ? (
+          <div className="text-white bg-red-200 text-center para">
+            Error invalid username or password
+          </div>
+        ) : null}
         {/* Login Form */}
         <form method="post" onSubmit={submitHandler}>
           <div className="relative flex flex-col">
@@ -143,6 +161,7 @@ const LoginPage: React.FC = () => {
               className="relative form-control border shadow-sm"
               aria-describedby="username"
               ref={usernameRef}
+              name="username"
               required
             />
           </div>
