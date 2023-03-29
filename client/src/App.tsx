@@ -32,7 +32,7 @@ const App: React.FC = () => {
             path={`${
               !authenticated
                 ? "/planet-preserve/login"
-                : "/planet-preserve/dashboard"
+                : "/planet-preserve/dashboard/:username"
             }`}
             element={
               <Suspense fallback={<div>Loading...</div>}>
