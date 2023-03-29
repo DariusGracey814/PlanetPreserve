@@ -101,7 +101,7 @@ const LoginPage: React.FC = () => {
   // Navigate to dashboard if user is authenicated
   useEffect(() => {
     if (authenticated) {
-      navigate("/planet-preserve/dashboard");
+      navigate(`/planet-preserve/dashboard/${enteredUsername}`);
       setLoadState(false);
     }
   }, [authenticated]);
