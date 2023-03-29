@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   FaUserAlt,
@@ -13,6 +14,8 @@ import { IoIosAddCircle } from "react-icons/io";
 
 const DashBoardNavigation: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
+
+  const { username } = useParams();
 
   return (
     <div className="d_nav--wrapper border">
@@ -38,7 +41,7 @@ const DashBoardNavigation: React.FC = () => {
               <div className="flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white">
                 <FaUserAlt className="dashboard-icon" />
               </div>
-              <p className="text-white username ml-3">Darius Gracey</p>
+              <p className="text-white username ml-3">{username}</p>
             </div>
             <div>
               <FaInfoCircle className="text-white text-1xl" />
