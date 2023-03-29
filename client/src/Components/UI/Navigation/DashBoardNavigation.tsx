@@ -13,22 +13,10 @@ import { BiMessage, BiMenuAltLeft, BiLogOutCircle } from "react-icons/bi";
 import { IoIosAddCircle } from "react-icons/io";
 
 const DashBoardNavigation: React.FC = () => {
-  const [expanded, setExpanded] = useState<boolean>(false);
-
   const { username } = useParams();
 
   return (
     <div className="d_nav--wrapper border">
-      {/* Mobile Navigation */}
-      <button
-        className="show_dashboard--nav"
-        aria-controls="DashboardMobileNavigation"
-        aria-expanded={`${expanded}`}
-        aria-label="mobile navigation"
-      >
-        <BiMenuAltLeft className="mobile-nav" />
-      </button>
-
       <aside
         id="DashboardMobileNavigation"
         className="dashboard_nav--bg h-screen"
@@ -41,7 +29,7 @@ const DashBoardNavigation: React.FC = () => {
               <div className="flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white">
                 <FaUserAlt className="dashboard-icon" />
               </div>
-              <p className="text-white username ml-3">{username}</p>
+              <p className="text-white username ml-3">Welcome Darius</p>
             </div>
             <div>
               <FaInfoCircle className="text-white text-1xl" />
@@ -106,7 +94,7 @@ const DashBoardNavigation: React.FC = () => {
 
             <li className="flex items-center mb-4 dashboard-link">
               <BiLogOutCircle className="nav-icon" />
-              <Link to="/planet-preserve/login" className="nav-text ml-4">
+              <Link to="/" className="nav-text ml-4">
                 Logout
               </Link>
             </li>

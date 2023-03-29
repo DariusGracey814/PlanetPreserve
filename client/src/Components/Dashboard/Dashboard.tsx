@@ -1,53 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import DashBoardNavigation from "../UI/Navigation/DashBoardNavigation";
+import PlanetPreserveMap from "../HighChart/HighChartMap";
 import { AiFillStar } from "react-icons/ai";
-import { BiWorld } from "react-icons/bi";
+import { BiMenuAltLeft, BiWorld } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 
 const Dashboard: React.FC = () => {
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const [latitude, setLatitude] = useState<number>(0);
+  const [longitude, setLongitude] = useState<number>(0);
+
+  const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  } else {
+    console.log("Api not supported");
+  }
+
+  function success(pos: { coords: GeolocationCoordinates; timestamp: number }) {
+    console.log(pos);
+    const crd = pos.coords;
+    console.log("Your current position is:");
+    console.log(`Latitude : ${crd.latitude}`);
+    setLatitude(crd.latitude);
+    console.log(`Longitude: ${crd.longitude}`);
+    setLongitude(crd.longitude);
+  }
+
+  function error(err: { code: number; message: string }) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
   return (
     <section className="grid dashboard_grid w-screen h-screen">
-      <DashBoardNavigation />
+      <div className="mobile-navigation border border-red">
+        <DashBoardNavigation />
+      </div>
+
+      {/* Mobile Navigation */}
+      <button
+        className="mobile-nav"
+        aria-controls="DashboardMobileNavigation"
+        aria-expanded={`${expanded}`}
+        aria-label="mobile navigation"
+      >
+        <BiMenuAltLeft className="mobile-nav" />
+      </button>
 
       {/* DASHBOARD  */}
-      <div className="px-5 py-4 border">
+      <div className="border border-red-600">
         {/* Contributions Stats (current eco contributions, world eco contributes, stars 1 = 1 contribution) */}
-        <div className="dashboard_container flex justify-between border">
-          <h1 className="stat-h1">Overview</h1>
+        <div className="dashboard_container">
+          <h1 className="stat-h1 text-center">Dashboard Overview</h1>
           {/* Contribution bucket 1 */}
-          <div className="stat_wrapper grid grid-3-cols">
-            {/* #1 */}
-            <div className="stats-bg rounded-lg p-3 shadow-md">
-              <h2 className="stat-h2 flex items-center">
-                <span>
-                  <FaUserAlt className="stat-icon--user" />
-                </span>
-                Your Eco Contributions
-              </h2>
-              <p className="stat-counter">{21}</p>
+          {latitude !== 0 && longitude !== 0 ? (
+            <PlanetPreserveMap latitude={latitude} longitude={longitude} />
+          ) : (
+            <div className="flex justify-center items-center w-full h-screen">
+              Enable Location to view map
             </div>
-            {/* #2 */}
-            <div className="stats-bg rounded-xl p-3 shadow-md">
-              <h2 className="stat-h2 flex items-center">
-                <BiWorld className="stat-icon" /> USA Eco Contributions
-              </h2>
-              <p className="stat-counter">{1000}</p>
-            </div>
-            {/* #3 */}
-            <div className="stats-bg rounded-lg p-3 shadow-md">
-              <h2 className="stat-h2 flex items-center justify-center">
-                <span className="flex star_icon--wrapper">
-                  <AiFillStar className="star-icon text-center" />
-                  <AiFillStar className="star-icon text-center" />
-                  <AiFillStar className="star-icon text-center" />
-                </span>
-                Your Eco Stars
-              </h2>
-              <p className="stat-counter">{21}</p>
-            </div>
-          </div>
+          )}
         </div>
-        Dashboard
       </div>
     </section>
   );

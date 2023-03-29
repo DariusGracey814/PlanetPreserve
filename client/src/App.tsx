@@ -18,22 +18,19 @@ const App: React.FC = () => {
     <div>
       <main>
         {/* Application header */}
-        <Header />
+        {/* <Header /> */}
+        <Dashboard />
         <Routes>
           {/* Default Page route */}
-          <Route path="/" element={<Navigate to="/planet-preserve/login" />} />
+          {/* <Route path="/" element={<Navigate to="/planet-preserve/login" />} /> */}
           {/* Login Page route*/}
-          <Route path="/planet-preserve/login" element={<LoginPage />} />
+          {/* <Route path="/planet-preserve/login" element={<LoginPage />} /> */}
           {/* Sign up Page route */}
-          <Route path="/planet-preserve/signup" element={<SignupPage />} />
+          {/* <Route path="/planet-preserve/signup" element={<SignupPage />} /> */}
 
           {/* User Dashboard route */}
-          <Route
-            path={`${
-              !authenticated
-                ? "/planet-preserve/login"
-                : "/planet-preserve/dashboard/:username"
-            }`}
+          {/* <Route
+            path="/planet-preserve/dashboard/:username"
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Container>
@@ -41,16 +38,16 @@ const App: React.FC = () => {
                 </Container>
               </Suspense>
             }
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="*"
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <LoginPage />
               </Suspense>
             }
-          />
+          /> */}
         </Routes>
         {/* <Container></Container> */}
       </main>
