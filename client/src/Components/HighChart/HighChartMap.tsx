@@ -21,7 +21,8 @@ const PlanetPreserveMap = ({ latitude, longitude }: Props) => {
       <GoogleMap
         zoom={10}
         center={{ lat: +latitude, lng: +longitude }}
-        mapContainerClassName="map-container"
+        mapContainerClassName="map-container shadow-xl"
+        mapTypeId={google.maps.MapTypeId.HYBRID}
       >
         <Marker position={{ lat: +latitude, lng: +longitude }} />
       </GoogleMap>

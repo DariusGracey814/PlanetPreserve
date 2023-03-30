@@ -16,7 +16,7 @@ const DashBoardNavigation: React.FC = () => {
   const { username } = useParams();
 
   return (
-    <div className="d_nav--wrapper border">
+    <div className="d_nav--wrapper">
       <aside
         id="DashboardMobileNavigation"
         className="dashboard_nav--bg h-screen"

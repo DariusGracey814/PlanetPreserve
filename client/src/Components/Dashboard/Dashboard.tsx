@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { FormEvent, MouseEventHandler, useState } from "react";
 import DashBoardNavigation from "../UI/Navigation/DashBoardNavigation";
 import PlanetPreserveMap from "../HighChart/HighChartMap";
-import { AiFillStar } from "react-icons/ai";
+import { AiFillStar, AiFillCloseSquare } from "react-icons/ai";
 import { BiMenuAltLeft, BiWorld } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 
 const Dashboard: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
+  const [hidden, setHidden] = useState<boolean>(true);
+  const [toggleBtn, setToggleBtn] = useState<boolean>(false);
+  const [state, setState] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
 
+  console.log(state);
+
+  // Geolocation of user for google maps api
   const options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -23,17 +30,19 @@ const Dashboard: React.FC = () => {
   }
 
   function success(pos: { coords: GeolocationCoordinates; timestamp: number }) {
-    console.log(pos);
     const crd = pos.coords;
-    console.log("Your current position is:");
-    console.log(`Latitude : ${crd.latitude}`);
     setLatitude(crd.latitude);
-    console.log(`Longitude: ${crd.longitude}`);
     setLongitude(crd.longitude);
   }
 
   function error(err: { code: number; message: string }) {
     console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  // Dashboard Toggle
+  function toggleStats(evt: FormEvent) {
+    setState((prevState) => !prevState);
+    setHidden((prevState) => !prevState);
   }
 
   return (
@@ -43,20 +52,37 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <button
-        className="mobile-nav"
-        aria-controls="DashboardMobileNavigation"
-        aria-expanded={`${expanded}`}
-        aria-label="mobile navigation"
+      <div className="mobile-nav--wrapper flex justify-between items-center">
+        <button
+          className="mobile-nav"
+          aria-controls="DashboardMobileNavigation"
+          aria-expanded={`${expanded}`}
+          aria-label="mobile navigation"
+        >
+          <BiMenuAltLeft className="mobile-nav" />
+        </button>
+
+        <div className="contributions-tab mt-2">
+          <button
+            className="flex items-center justify-center"
+            onClick={toggleStats}
+          >
+            {hidden ? <BsFillArrowLeftSquareFill /> : <AiFillCloseSquare />}{" "}
+            &nbsp; {hidden ? "Stats" : "Close"}
+          </button>
+        </div>
+      </div>
+      {/* <div
+        className="mobile-header border border-red-600"
+        aria-hidden={expanded}
       >
-        <BiMenuAltLeft className="mobile-nav" />
-      </button>
+       
+      </div> */}
 
       {/* DASHBOARD  */}
-      <div className="border border-red-600">
+      <div>
         {/* Contributions Stats (current eco contributions, world eco contributes, stars 1 = 1 contribution) */}
-        <div className="dashboard_container">
-          <h1 className="stat-h1 text-center">Dashboard Overview</h1>
+        <div className="dashboard_container" aria-hidden={hidden}>
           {/* Contribution bucket 1 */}
           {latitude !== 0 && longitude !== 0 ? (
             <PlanetPreserveMap latitude={latitude} longitude={longitude} />
@@ -65,6 +91,42 @@ const Dashboard: React.FC = () => {
               Enable Location to view map
             </div>
           )}
+
+          {/* Contribution bucket 2 */}
+          <div
+            className={`flex p-3 contribution-stats ${
+              state ? "contribution-stats-active" : ""
+            }`}
+          >
+            <div className="contributions flex justify-between w-full">
+              {/* All Contributions */}
+              <div className="p-3 stat-box shadow-xl">
+                <p className="mb-1">Eco Contributions</p>
+                <p className="flex items-center">
+                  <BiWorld className="stat-icon" />
+                  <span className="text-lg">1000</span>
+                </p>
+              </div>
+
+              {/* Your Contributions */}
+              <div className="p-3 stat-box shadow-xl mx-3">
+                <p className="mb-1">Your Contributions</p>
+                <p className="flex items-center">
+                  <FaUserAlt className="stat-icon user-icon" />
+                  <span className="text-lg">30</span>
+                </p>
+              </div>
+
+              {/* Stars */}
+              <div className="p-3 stat-box shadow-xl">
+                <p className="mb-1">Eco Stars</p>
+                <p className="flex items-center">
+                  <AiFillStar className="stat-icon" />
+                  <span className="text-lg">30</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

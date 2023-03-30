@@ -180,17 +180,22 @@ form {
 .mobile-nav {
   font-size: 2.3rem;
   color: var(--main--green);
+}
+
+.mobile-nav--wrapper {
   display: none;
 }
 
 .map_wrapper {
   width: 100%;
-  height: 96vh;
+  height: 85vh;
+  padding: 0.7em;
 }
 
 .map-container {
   width: 100%;
   height: 100%;
+  border-radius: 10px;
 }
 
 .dashboard_grid {
@@ -288,6 +293,21 @@ ul {
   background: var(--white-offset);
 }
 
+.stat-box {
+  border-radius: 10px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--main--green);
+  color: var(--white-offset);
+}
+
+.user-icon {
+  font-size: 1.3rem;
+}
+
 .stat-h1,
 .stat-h2,
 .stat-counter {
@@ -300,6 +320,7 @@ ul {
   font-size: 1.8rem;
   font-weight: 500;
   letter-spacing: 1px;
+  line-height: 1;
 }
 
 .stat-h2,
@@ -323,19 +344,10 @@ ul {
   margin-top: 0.2em;
 }
 
-.star-icon {
-  color: var(--main--green);
-  font-size: 1.5rem;
-}
-
 .stat-icon {
-  color: var(--main--green);
-  font-size: 1.6rem;
-}
-
-.stat-icon--user {
-  color: var(--main--green);
+  color: var(--white-offset);
   font-size: 1.4rem;
+  margin-right: 0.1em;
 }
 
 .stat-counter,
@@ -359,18 +371,58 @@ ul {
 /* --------- MEDIA QUERIES ---------- */
 @media (max-width: 1100px) {
   /* DASHBOARD NAVIGATION */
+  .mobile-nav--wrapper {
+    display: flex;
+  }
   .mobile-nav {
-    position: absolute;
-    display: block;
+    margin-left: 2px;
   }
 
   .mobile-navigation {
     position: absolute;
-    left: -1000px;
+    left: -9999px;
+  }
+
+  .contribution-stats {
+    position: absolute;
+    top: 0;
+    right: -9999px;
+    background-color: var(--main--green);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .contribution-stats.contribution-stats-active {
+    top: 48px;
+    right: 0;
+  }
+
+  .contributions {
+    flex-direction: column;
   }
 
   .dashboard_grid {
     grid-template-columns: 1fr;
+  }
+
+  .stat-box {
+    width: 175px;
+    margin-left: 1em;
+  }
+
+  .contributions {
+    justify-content: end;
+  }
+
+  .map_wrapper {
+    height: 95vh;
+    padding: 0.7em;
+  }
+
+  .contributions-tab {
+    max-width: 110px;
+    padding: 0.5em;
+    background-color: var(--main--green);
+    color: var(--white-offset);
   }
 }
 
