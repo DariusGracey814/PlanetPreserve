@@ -72,9 +72,9 @@ const Dashboard: React.FC = () => {
           <BiMenuAltLeft className="mobile-nav" />
         </button>
 
-        <div className="contributions-tab mt-2">
+        <div className="mt-2">
           <button
-            className="flex items-center justify-center"
+            className="contributions-tab flex items-center justify-center"
             onClick={toggleStats}
           >
             {hidden ? <BsFillArrowLeftSquareFill /> : <AiFillCloseSquare />}{" "}
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
           >
             <div className="contributions flex justify-between w-full">
               {/* All Contributions */}
-              <div className="p-3 stat-box shadow-xl">
+              <div className="p-4 stat-box shadow-xl">
                 <p className="mb-1">Eco Contributions</p>
                 <p className="flex items-center">
                   <BiWorld className="stat-icon" />
@@ -113,7 +113,7 @@ const Dashboard: React.FC = () => {
               </div>
 
               {/* Your Contributions */}
-              <div className="p-3 stat-box shadow-xl mx-3">
+              <div className="p-4 stat-box shadow-xl mx-3">
                 <p className="mb-1">Your Contributions</p>
                 <p className="flex items-center">
                   <FaUserAlt className="stat-icon user-icon" />
@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
               </div>
 
               {/* Stars */}
-              <div className="p-3 stat-box shadow-xl">
+              <div className="p-4 stat-box shadow-xl">
                 <p className="mb-1">Eco Stars</p>
                 <p className="flex items-center">
                   <AiFillStar className="stat-icon" />

@@ -182,6 +182,10 @@ form {
   color: var(--main--green);
 }
 
+.mobile-navigation {
+  border: none;
+}
+
 .mobile-nav--wrapper {
   display: none;
 }
@@ -258,7 +262,6 @@ ul {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   transition: all 0.3s ease;
-  z-index: 10;
 }
 
 .nav-icon,
@@ -389,10 +392,12 @@ ul {
   .mobile-nav--wrapper {
     display: flex;
   }
+
   .mobile-nav {
     margin-left: 2px;
     opacity: 0.8;
     transition: all 0.3s ease;
+    z-index: 10;
   }
 
   .mobile-nav:active,
@@ -400,23 +405,28 @@ ul {
     opacity: 1;
   }
 
+  .navigation {
+    padding: 1.5em 2.5em 1.5em 2em;
+  }
+
   .mobile-navigation {
     position: absolute;
     top: 0;
     left: -9999px;
-    opacity: 0;
+    display: none;
     transition: all 0.3s ease;
-    border: none;
   }
 
   .mobile-navigation.mobile-navigation--active {
+    display: flex;
     left: 0;
     opacity: 1;
-    z-index: 99;
+    z-index: 10;
   }
 
   .nav-overlay.nav-overlay--active {
     display: block;
+    z-index: 9;
   }
 
   .mobile-closeIcon {
@@ -443,7 +453,7 @@ ul {
 
   .contribution-stats.contribution-stats-active {
     top: 48px;
-    right: 0;
+    right: 15px;
     opacity: 1;
   }
 
@@ -475,6 +485,8 @@ ul {
     background-color: var(--main--green);
     color: var(--white-offset);
     transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
   }
 
   .contributions-tab:active,

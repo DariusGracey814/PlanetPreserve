@@ -14,8 +14,6 @@ const App: React.FC = () => {
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
 
-  console.log(authenticated);
-
   return (
     <div>
       <main>

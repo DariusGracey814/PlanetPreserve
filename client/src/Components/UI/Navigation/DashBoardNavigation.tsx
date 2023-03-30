@@ -35,14 +35,14 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
         className="dashboard_nav--bg h-screen"
       >
         {/* Dashboard Navigation */}
-        <nav className="px-8 py-5">
+        <nav className="navigation px-8 py-5">
           {/* User icon and name */}
           <div className="flex justify-between items-center">
             <div className="flex items-center">
               <div className="flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white">
                 <FaUserAlt className="dashboard-icon" />
               </div>
-              <p className="text-white username ml-3">Welcome Darius</p>
+              <p className="text-white username ml-3">Welcome {username}</p>
             </div>
 
             <div>
@@ -51,7 +51,9 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
                 aria-label="close navigation"
                 onClick={closeNavigation}
               >
-                <AiFillCloseSquare className="mobile-closeIcon text-white text-2xl" />
+                {expanded ? (
+                  <AiFillCloseSquare className="mobile-closeIcon text-white text-2xl" />
+                ) : null}
               </button>
             </div>
           </div>
