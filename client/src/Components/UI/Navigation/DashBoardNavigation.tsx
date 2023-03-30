@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -8,12 +8,25 @@ import {
   FaEdit,
   FaTrashAlt,
 } from "react-icons/fa";
-import { AiOutlineSearch, AiFillQuestionCircle } from "react-icons/ai";
+import {
+  AiOutlineSearch,
+  AiFillQuestionCircle,
+  AiFillCloseSquare,
+} from "react-icons/ai";
 import { BiMessage, BiMenuAltLeft, BiLogOutCircle } from "react-icons/bi";
 import { IoIosAddCircle } from "react-icons/io";
 
-const DashBoardNavigation: React.FC = () => {
+interface Props {
+  expanded: boolean;
+  setExpanded: Dispatch<SetStateAction<boolean>>;
+}
+
+function DashBoardNavigation({ expanded, setExpanded }: Props) {
   const { username } = useParams();
+
+  const closeNavigation = (evt: FormEvent) => {
+    setExpanded((prevState) => !prevState);
+  };
 
   return (
     <div className="d_nav--wrapper">
@@ -31,8 +44,15 @@ const DashBoardNavigation: React.FC = () => {
               </div>
               <p className="text-white username ml-3">Welcome Darius</p>
             </div>
+
             <div>
-              <FaInfoCircle className="text-white text-1xl" />
+              <button
+                type="button"
+                aria-label="close navigation"
+                onClick={closeNavigation}
+              >
+                <AiFillCloseSquare className="mobile-closeIcon text-white text-2xl" />
+              </button>
             </div>
           </div>
 
@@ -125,6 +145,6 @@ const DashBoardNavigation: React.FC = () => {
       </aside>
     </div>
   );
-};
+}
 
 export default DashBoardNavigation;

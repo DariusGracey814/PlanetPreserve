@@ -9,12 +9,8 @@ import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 const Dashboard: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
-  const [toggleBtn, setToggleBtn] = useState<boolean>(false);
-  const [state, setState] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
-
-  console.log(state);
 
   // Geolocation of user for google maps api
   const options = {
@@ -39,17 +35,30 @@ const Dashboard: React.FC = () => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
+  // Navigation toggle
+  function toggleNavigation(evt: FormEvent) {
+    setExpanded((prevState) => !prevState);
+  }
+
   // Dashboard Toggle
   function toggleStats(evt: FormEvent) {
-    setState((prevState) => !prevState);
     setHidden((prevState) => !prevState);
   }
 
   return (
-    <section className="grid dashboard_grid w-screen h-screen">
-      <div className="mobile-navigation border border-red">
-        <DashBoardNavigation />
+    <section className="dashboard-section grid dashboard_grid w-screen h-screen">
+      <div
+        className={`mobile-navigation ${
+          expanded ? "mobile-navigation--active" : ""
+        } border border-red`}
+      >
+        <DashBoardNavigation expanded={expanded} setExpanded={setExpanded} />
       </div>
+
+      {/* Mobile Navigation  */}
+      <div
+        className={`nav-overlay ${expanded ? "nav-overlay--active" : ""}`}
+      ></div>
 
       {/* Mobile Navigation */}
       <div className="mobile-nav--wrapper flex justify-between items-center">
@@ -58,6 +67,7 @@ const Dashboard: React.FC = () => {
           aria-controls="DashboardMobileNavigation"
           aria-expanded={`${expanded}`}
           aria-label="mobile navigation"
+          onClick={toggleNavigation}
         >
           <BiMenuAltLeft className="mobile-nav" />
         </button>
@@ -72,12 +82,6 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
       </div>
-      {/* <div
-        className="mobile-header border border-red-600"
-        aria-hidden={expanded}
-      >
-       
-      </div> */}
 
       {/* DASHBOARD  */}
       <div>
@@ -95,7 +99,7 @@ const Dashboard: React.FC = () => {
           {/* Contribution bucket 2 */}
           <div
             className={`flex p-3 contribution-stats ${
-              state ? "contribution-stats-active" : ""
+              !hidden ? "contribution-stats-active" : ""
             }`}
           >
             <div className="contributions flex justify-between w-full">
@@ -134,4 +138,3 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
-// grid grid-3-cols

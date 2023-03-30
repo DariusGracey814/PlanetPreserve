@@ -6,7 +6,7 @@ interface Props {
   longitude: number;
 }
 
-const PlanetPreserveMap = ({ latitude, longitude }: Props) => {
+function PlanetPreserveMap({ latitude, longitude }: Props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
@@ -28,6 +28,6 @@ const PlanetPreserveMap = ({ latitude, longitude }: Props) => {
       </GoogleMap>
     </div>
   );
-};
+}
 
 export default PlanetPreserveMap;
