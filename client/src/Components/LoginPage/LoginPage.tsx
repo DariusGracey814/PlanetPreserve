@@ -154,6 +154,7 @@ const LoginPage: React.FC = () => {
             Error invalid username or password
           </div>
         ) : null}
+        {}
         {/* Login Form */}
         <form method="post" onSubmit={submitHandler} className="relative">
           {loadState ? <LoadingSpinner /> : null}

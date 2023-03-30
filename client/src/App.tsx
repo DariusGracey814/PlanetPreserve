@@ -14,6 +14,8 @@ const App: React.FC = () => {
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
 
+  console.log(authenticated);
+
   return (
     <div>
       <main>
@@ -29,7 +31,11 @@ const App: React.FC = () => {
 
           {/* User Dashboard route */}
           <Route
-            path="/planet-preserve/dashboard/:username"
+            path={`${
+              authenticated !== null && authenticated === true
+                ? "/planet-preserve/dashboard/:username"
+                : "/planet-preserve/login"
+            }`}
             element={
               <Suspense fallback={<div>Loading...</div>}>
                 <Container>
