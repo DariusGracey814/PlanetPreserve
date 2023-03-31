@@ -13,7 +13,6 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
-  const [formSubmitTracker, setFormSubmitTracker] = useState<number>(0);
   const [loadState, setLoadState] = useState<boolean>(false);
   // Demo Account States
   const [demoUsername, setDemoUsername] = useState<string>("");
@@ -65,8 +64,9 @@ const LoginPage: React.FC = () => {
     dispatch(formDataActions.setErrorMessage());
     dispatch(formDataActions.clearSetIsAuthenticated());
     dispatch(formDataActions.setValidEmail(false));
-    dispatch(formDataActions.setValidUsername(false));
-    dispatch(formDataActions.setValidPassword(false));
+    setLoadState(false);
+    setDemoUsername("");
+    setDemoPassword("");
   }, []);
 
   // Clear error messages after 3 seconds
@@ -99,7 +99,7 @@ const LoginPage: React.FC = () => {
           return err?.message;
         });
     }
-  }, [formSubmitTracker]);
+  }, [validUsername, validPassword]);
 
   // Navigate to dashboard if user is authenicated
   useEffect(() => {
@@ -132,12 +132,10 @@ const LoginPage: React.FC = () => {
 
     // Start timer clearing error messages
     setErrorTracker((prevState) => prevState + 1);
-    setFormSubmitTracker((prevState) => prevState + 1);
   };
 
   // demo Account
   const demoAccount = (evt: FormEvent) => {
-    evt.preventDefault();
     setDemoUsername("DemoUser");
     setDemoPassword("Demo1234");
   };
@@ -169,7 +167,7 @@ const LoginPage: React.FC = () => {
           );
         })}
         {/* Login form invalid user error */}
-        {authenticated ? (
+        {authenticated === false ? (
           <div className="text-white bg-red-200 text-center para">
             Error invalid username or password
           </div>
@@ -179,11 +177,7 @@ const LoginPage: React.FC = () => {
         <form method="post" onSubmit={submitHandler} className="relative">
           {loadState ? <LoadingSpinner /> : null}
 
-          <div
-            className={`relative flex flex-col ${
-              loadState ? "input-blur" : ""
-            }`}
-          >
+          <div className="relative flex flex-col">
             <label htmlFor="InputUsername" className="form-label">
               Username
             </label>
@@ -196,22 +190,12 @@ const LoginPage: React.FC = () => {
               ref={usernameRef}
               name="username"
               readOnly={loadState ? true : false}
-              value={
-                demoUsername !== ""
-                  ? demoUsername
-                  : enteredUsername !== ""
-                  ? enteredUsername
-                  : null
-              }
+              value={demoUsername !== "" ? demoUsername : null}
               required
             />
           </div>
 
-          <div
-            className={`relative flex flex-col mb-5 ${
-              loadState ? "input-blur" : ""
-            }`}
-          >
+          <div className="relative flex flex-col mb-5">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>

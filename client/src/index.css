@@ -440,7 +440,7 @@ ul {
     top: 0;
     left: -9999px;
     display: none;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease-in;
   }
 
   .mobile-navigation.mobile-navigation--active {
@@ -598,11 +598,6 @@ ul {
   100% {
     transform: rotate(360deg);
   }
-}
-
-/* Form blur when adding data to db */
-.input-blur {
-  filter: blur(2px);
 }
 
 .hide {

@@ -175,11 +175,7 @@ const SignupPage: React.FC = () => {
           </div>
 
           {/* Email Address */}
-          <div
-            className={`relative flex flex-col ${
-              loadState ? "input-blur" : ""
-            }`}
-          >
+          <div className="relative flex flex-col">
             <label htmlFor="InputEmail" className="form-label">
               Email
             </label>
@@ -195,11 +191,7 @@ const SignupPage: React.FC = () => {
             />
           </div>
 
-          <div
-            className={`relative flex flex-col mb-1 ${
-              loadState ? "input-blur" : ""
-            }`}
-          >
+          <div className="relative flex flex-col mb-1">
             <label htmlFor="InputPassword" className="form-label">
               Password
             </label>
@@ -214,9 +206,7 @@ const SignupPage: React.FC = () => {
           </div>
           {/* Username and Password forgot links  */}
           <div>
-            <p
-              className={`text-center text-sm ${loadState ? "input-blur" : ""}`}
-            >
+            <p className="text-center text-sm">
               By clicking sign up you agree with the{" "}
               <span className="underline clr-main">terms and services</span>
             </p>
@@ -225,7 +215,7 @@ const SignupPage: React.FC = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className={`btn btn-form ${loadState ? "hide" : ""}`}
+            className="btn btn-form"
             disabled={loadState ? true : false}
           >
             Sign up

@@ -13,6 +13,7 @@ const App: React.FC = () => {
   const authenticated = useSelector(
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
+
   const authUser: string = sessionStorage.getItem("authenticatedUser");
 
   return (
@@ -33,20 +34,17 @@ const App: React.FC = () => {
             path={`${
               authenticated || authUser === "true"
                 ? "/planet-preserve/dashboard/:username"
-                : "/planet-unauthorized-user-error=redirect"
+                : ""
             }`}
             element={
-              <Suspense fallback={<LoadingSpinnerFull />}>
-                <Container>
-                  <Dashboard />
-                </Container>
-              </Suspense>
+              <Container>
+                <Dashboard />
+              </Container>
             }
           />
 
           <Route path="*" element={<LoginPage />} />
         </Routes>
-        {/* <Container></Container> */}
       </main>
     </div>
   );

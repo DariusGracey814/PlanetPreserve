@@ -1,13 +1,9 @@
-import React, { Dispatch, FormEvent, SetStateAction } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {
-  FaUserAlt,
-  FaInfoCircle,
-  FaQrcode,
-  FaEdit,
-  FaTrashAlt,
-} from "react-icons/fa";
+import { AuthSliceActions } from "../../../../store/auth";
+import { formDataActions } from "../../../../store/forms";
+import { FaUserAlt, FaQrcode, FaEdit, FaTrashAlt } from "react-icons/fa";
 import {
   AiOutlineSearch,
   AiFillQuestionCircle,
@@ -15,6 +11,8 @@ import {
 } from "react-icons/ai";
 import { BiMessage, BiMenuAltLeft, BiLogOutCircle } from "react-icons/bi";
 import { IoIosAddCircle } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { LoadingSpinnerFull } from "../../LoadingSpinner/LoadingSpinner";
 
 interface Props {
   expanded: boolean;
@@ -24,6 +22,9 @@ interface Props {
 function DashBoardNavigation({ expanded, setExpanded }: Props) {
   const { username } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [logoutState, setLogoutState] = useState<boolean>(null);
 
   const closeNavigation = (evt: FormEvent) => {
     setExpanded((prevState) => !prevState);
@@ -31,11 +32,20 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
   const logoutHandler = (evt: FormEvent) => {
     evt.preventDefault();
+    // Clear redux authentication state
+    dispatch(AuthSliceActions.setAuthState(null));
+
+    // un-validate redux username and password
+    dispatch(formDataActions.setValidUsername(false));
+    dispatch(formDataActions.setValidPassword(false));
+
     // Clear session
     sessionStorage.removeItem("authenticatedUser");
     sessionStorage.removeItem("username");
-    console.log("clicked");
-    navigate("/planet-preserve/login");
+
+    setTimeout(() => {
+      navigate("/planet-preserve/login");
+    }, 3000);
   };
 
   return (
