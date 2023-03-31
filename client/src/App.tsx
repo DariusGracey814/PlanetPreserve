@@ -7,7 +7,6 @@ import { LoadingSpinnerFull } from "./Components/LoadingSpinner/LoadingSpinner";
 import { RootState } from "../store/store";
 import LoginPage from "./Components/LoginPage/LoginPage";
 import SignupPage from "./Components/SignupPage/SignupPage";
-import HelloWorld from "./Components/Hello";
 const Dashboard = React.lazy(() => import("./Components/Dashboard/Dashboard"));
 
 const App: React.FC = () => {
@@ -34,7 +33,7 @@ const App: React.FC = () => {
             path={`${
               authenticated || authUser === "true"
                 ? "/planet-preserve/dashboard/:username"
-                : null
+                : "/planet-unauthorized-user-error=redirect"
             }`}
             element={
               <Suspense fallback={<LoadingSpinnerFull />}>
@@ -45,14 +44,7 @@ const App: React.FC = () => {
             }
           />
 
-          <Route
-            path="*"
-            element={
-              <Suspense fallback={<div>Loading...</div>}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
+          <Route path="*" element={<LoginPage />} />
         </Routes>
         {/* <Container></Container> */}
       </main>

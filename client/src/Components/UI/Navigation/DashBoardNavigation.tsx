@@ -1,5 +1,5 @@
-import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { Dispatch, FormEvent, SetStateAction } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
   FaUserAlt,
@@ -23,9 +23,19 @@ interface Props {
 
 function DashBoardNavigation({ expanded, setExpanded }: Props) {
   const { username } = useParams();
+  const navigate = useNavigate();
 
   const closeNavigation = (evt: FormEvent) => {
     setExpanded((prevState) => !prevState);
+  };
+
+  const logoutHandler = (evt: FormEvent) => {
+    evt.preventDefault();
+    // Clear session
+    sessionStorage.removeItem("authenticatedUser");
+    sessionStorage.removeItem("username");
+    console.log("clicked");
+    navigate("/planet-preserve/login");
   };
 
   return (
@@ -116,9 +126,14 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
             <li className="flex items-center mb-4 dashboard-link">
               <BiLogOutCircle className="nav-icon" />
-              <Link to="/" className="nav-text ml-4">
+              <button
+                className="nav-text ml-4"
+                type="button"
+                aria-label="logout"
+                onClick={logoutHandler}
+              >
                 Logout
-              </Link>
+              </button>
             </li>
           </ul>
 
