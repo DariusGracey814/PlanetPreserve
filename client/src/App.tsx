@@ -1,18 +1,20 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useMemo, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Components/UI/Header/Header";
 import Container from "./Components/UI/Container/Container";
+import { LoadingSpinnerFull } from "./Components/LoadingSpinner/LoadingSpinner";
 import { RootState } from "../store/store";
 import LoginPage from "./Components/LoginPage/LoginPage";
 import SignupPage from "./Components/SignupPage/SignupPage";
+import HelloWorld from "./Components/Hello";
 const Dashboard = React.lazy(() => import("./Components/Dashboard/Dashboard"));
 
 const App: React.FC = () => {
-  // user authentication state
   const authenticated = useSelector(
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
+  const authUser: string = sessionStorage.getItem("authenticatedUser");
 
   return (
     <div>
@@ -30,12 +32,12 @@ const App: React.FC = () => {
           {/* User Dashboard route */}
           <Route
             path={`${
-              authenticated !== null && authenticated === true
+              authenticated || authUser === "true"
                 ? "/planet-preserve/dashboard/:username"
-                : "/planet-preserve/login"
+                : null
             }`}
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<LoadingSpinnerFull />}>
                 <Container>
                   <Dashboard />
                 </Container>

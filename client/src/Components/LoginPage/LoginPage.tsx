@@ -101,8 +101,18 @@ const LoginPage: React.FC = () => {
   // Navigate to dashboard if user is authenicated
   useEffect(() => {
     if (authenticated) {
-      navigate(`/planet-preserve/dashboard/${enteredUsername}`);
       setLoadState(false);
+      // Set authenticated user in a session
+      sessionStorage.setItem("authenticatedUser", `${authenticated}`);
+      sessionStorage.setItem("username", `${enteredUsername}`);
+    }
+
+    // Get authenticated session
+    const authUser: string = sessionStorage.getItem("authenticatedUser");
+    const authUsername: string = sessionStorage.getItem("username");
+
+    if (authUser === "true" && authUsername !== "") {
+      navigate(`/planet-preserve/dashboard/${authUsername}`);
     }
   }, [authenticated]);
 
@@ -149,7 +159,7 @@ const LoginPage: React.FC = () => {
           );
         })}
         {/* Login form invalid user error */}
-        {authenticated === false ? (
+        {authenticated ? (
           <div className="text-white bg-red-200 text-center para">
             Error invalid username or password
           </div>

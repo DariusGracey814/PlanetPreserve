@@ -1,6 +1,6 @@
-import React, { FormEvent, MouseEventHandler, useState } from "react";
+import React, { FormEvent, Suspense, useState } from "react";
 import DashBoardNavigation from "../UI/Navigation/DashBoardNavigation";
-import PlanetPreserveMap from "../HighChart/GoogleMap";
+const PlanetPreserveMap = React.lazy(() => import("../HighChart/GoogleMap"));
 import { AiFillStar, AiFillCloseSquare } from "react-icons/ai";
 import { BiMenuAltLeft, BiWorld } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";

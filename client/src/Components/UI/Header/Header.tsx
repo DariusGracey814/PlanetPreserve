@@ -8,10 +8,12 @@ const Header: React.FC = () => {
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
 
+  const authUser = sessionStorage.getItem("authenticatedUser");
+
   return (
     <header className="header w-full absolute top-0 left-0 justify-end py-5 px-5">
       {/* Display main nav if user is not authenticated */}
-      {!authenticated ? <Navigation /> : null}
+      {authUser === "true" ? null : <Navigation />}
     </header>
   );
 };
