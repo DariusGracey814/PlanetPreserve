@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchUser } from "../../../api/LoginAuthApiService";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,9 @@ const LoginPage: React.FC = () => {
   const [errorTracker, setErrorTracker] = useState<number>(0);
   const [formSubmitTracker, setFormSubmitTracker] = useState<number>(0);
   const [loadState, setLoadState] = useState<boolean>(false);
+  // Demo Account States
+  const [demoUsername, setDemoUsername] = useState<string>("");
+  const [demoPassword, setDemoPassword] = useState<string>("");
 
   // Form Refs
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -132,6 +135,13 @@ const LoginPage: React.FC = () => {
     setFormSubmitTracker((prevState) => prevState + 1);
   };
 
+  // demo Account
+  const demoAccount = (evt: FormEvent) => {
+    evt.preventDefault();
+    setDemoUsername("DemoUser");
+    setDemoPassword("Demo1234");
+  };
+
   return (
     <section className="hero grid grid-2-cols">
       <div
@@ -186,6 +196,13 @@ const LoginPage: React.FC = () => {
               ref={usernameRef}
               name="username"
               readOnly={loadState ? true : false}
+              value={
+                demoUsername !== ""
+                  ? demoUsername
+                  : enteredUsername !== ""
+                  ? enteredUsername
+                  : null
+              }
               required
             />
           </div>
@@ -204,6 +221,7 @@ const LoginPage: React.FC = () => {
               className="form-control border shadow-sm"
               ref={passwordRef}
               readOnly={loadState ? true : false}
+              value={demoPassword !== "" ? demoPassword : null}
               required
             />
           </div>
@@ -215,6 +233,15 @@ const LoginPage: React.FC = () => {
             disabled={loadState ? true : false}
           >
             Login
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-form2"
+            disabled={loadState ? true : false}
+            onClick={demoAccount}
+          >
+            Use Demo Account
           </button>
 
           {/* Username and Password forgot links  */}
