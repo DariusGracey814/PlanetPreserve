@@ -12,7 +12,6 @@ import {
 import { BiMessage, BiMenuAltLeft, BiLogOutCircle } from "react-icons/bi";
 import { IoIosAddCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { LoadingSpinnerFull } from "../../LoadingSpinner/LoadingSpinner";
 
 interface Props {
   expanded: boolean;
@@ -25,6 +24,8 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
   const dispatch = useDispatch();
 
   const [logoutState, setLogoutState] = useState<boolean>(null);
+
+  const authUsername = sessionStorage.getItem("username");
 
   const closeNavigation = (evt: FormEvent) => {
     setExpanded((prevState) => !prevState);
@@ -45,7 +46,7 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
     setTimeout(() => {
       navigate("/planet-preserve/login");
-    }, 3000);
+    }, 2000);
   };
 
   return (
@@ -59,10 +60,10 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
           {/* User icon and name */}
           <div className="flex justify-between items-center">
             <div className="flex items-center">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white">
+              <div className="dashboard-icon--wrapper flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white">
                 <FaUserAlt className="dashboard-icon" />
               </div>
-              <p className="text-white username ml-3">Welcome {username}</p>
+              <p className="text-white username ml-3">{username} DashBoard</p>
             </div>
 
             <div>
@@ -101,7 +102,10 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
           <ul className="mb-14">
             <li className="flex items-center mb-4 dashboard-link">
               <FaQrcode className="nav-icon" />
-              <Link to="/dashboard" className="nav-text ml-4">
+              <Link
+                to={`/planet-preserve/dashboard/${authUsername}`}
+                className="nav-text ml-4"
+              >
                 Overview
               </Link>
             </li>
@@ -115,7 +119,10 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
             <li className="flex items-center mb-4 dashboard-link">
               <IoIosAddCircle className="nav-icon" />
-              <Link to="/dashboard" className="nav-text ml-4">
+              <Link
+                to={`/planet-preserve/${authUsername}/add-contribution`}
+                className="nav-text ml-4"
+              >
                 Add Contribution
               </Link>
             </li>

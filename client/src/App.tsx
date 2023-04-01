@@ -8,6 +8,9 @@ import { RootState } from "../store/store";
 import LoginPage from "./Components/LoginPage/LoginPage";
 import SignupPage from "./Components/SignupPage/SignupPage";
 const Dashboard = React.lazy(() => import("./Components/Dashboard/Dashboard"));
+const AddContribution = React.lazy(
+  () => import("./Components/Dashboard/AddContribution/AddContribution")
+);
 
 const App: React.FC = () => {
   const authenticated = useSelector(
@@ -39,6 +42,22 @@ const App: React.FC = () => {
             element={
               <Container>
                 <Dashboard />
+              </Container>
+            }
+          />
+
+          {/* User Dashboard route */}
+          <Route
+            path={`${
+              authenticated || authUser === "true"
+                ? "/planet-preserve/:username/add-contribution"
+                : ""
+            }`}
+            element={
+              <Container>
+                <Suspense fallback={<LoadingSpinnerFull />}>
+                  <AddContribution />
+                </Suspense>
               </Container>
             }
           />

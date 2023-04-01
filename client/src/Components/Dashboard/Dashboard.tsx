@@ -1,10 +1,12 @@
 import React, { FormEvent, Suspense, useState } from "react";
 import DashBoardNavigation from "../UI/Navigation/DashBoardNavigation";
-const PlanetPreserveMap = React.lazy(() => import("../HighChart/GoogleMap"));
+const PlanetPreserveMap = React.lazy(() => import("../GoogleMaps/GoogleMap"));
 import { AiFillStar, AiFillCloseSquare } from "react-icons/ai";
 import { BiMenuAltLeft, BiWorld } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import MobileHeader from "../UI/Navigation/MobileHeader";
+import Stats from "../Stats/Stats";
 
 const Dashboard: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
@@ -35,53 +37,23 @@ const Dashboard: React.FC = () => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
-  // Navigation toggle
-  function toggleNavigation(evt: FormEvent) {
-    setExpanded((prevState) => !prevState);
-  }
-
-  // Dashboard Toggle
-  function toggleStats(evt: FormEvent) {
-    setHidden((prevState) => !prevState);
-  }
-
   return (
     <section className="dashboard-section grid dashboard_grid w-screen h-screen">
       <div
         className={`mobile-navigation ${
           expanded ? "mobile-navigation--active" : ""
-        } border border-red`}
+        }`}
       >
         <DashBoardNavigation expanded={expanded} setExpanded={setExpanded} />
       </div>
 
-      {/* Mobile Navigation  */}
-      <div
-        className={`nav-overlay ${expanded ? "nav-overlay--active" : ""}`}
-      ></div>
-
-      {/* Mobile Navigation */}
-      <div className="mobile-nav--wrapper flex justify-between items-center">
-        <button
-          className="mobile-nav"
-          aria-controls="DashboardMobileNavigation"
-          aria-expanded={`${expanded}`}
-          aria-label="mobile navigation"
-          onClick={toggleNavigation}
-        >
-          <BiMenuAltLeft className="mobile-nav" />
-        </button>
-
-        <div className="mt-2">
-          <button
-            className="contributions-tab flex items-center justify-center"
-            onClick={toggleStats}
-          >
-            {hidden ? <BsFillArrowLeftSquareFill /> : <AiFillCloseSquare />}{" "}
-            &nbsp; {hidden ? "Stats" : "Close"}
-          </button>
-        </div>
-      </div>
+      {/* Mobile header */}
+      <MobileHeader
+        expanded={expanded}
+        setExpanded={setExpanded}
+        hidden={hidden}
+        setHidden={setHidden}
+      />
 
       {/* DASHBOARD  */}
       <div>
@@ -97,40 +69,7 @@ const Dashboard: React.FC = () => {
           )}
 
           {/* Contribution bucket 2 */}
-          <div
-            className={`flex p-3 contribution-stats ${
-              !hidden ? "contribution-stats-active" : ""
-            }`}
-          >
-            <div className="contributions flex justify-between w-full">
-              {/* All Contributions */}
-              <div className="p-4 stat-box shadow-xl">
-                <p className="mb-1">Eco Contributions</p>
-                <p className="flex items-center">
-                  <BiWorld className="stat-icon" />
-                  <span className="text-lg">1000</span>
-                </p>
-              </div>
-
-              {/* Your Contributions */}
-              <div className="p-4 stat-box shadow-xl mx-3">
-                <p className="mb-1">Your Contributions</p>
-                <p className="flex items-center">
-                  <FaUserAlt className="stat-icon user-icon" />
-                  <span className="text-lg">30</span>
-                </p>
-              </div>
-
-              {/* Stars */}
-              <div className="p-4 stat-box shadow-xl">
-                <p className="mb-1">Eco Stars</p>
-                <p className="flex items-center">
-                  <AiFillStar className="stat-icon" />
-                  <span className="text-lg">30</span>
-                </p>
-              </div>
-            </div>
-          </div>
+          <Stats hidden={hidden} />
         </div>
       </div>
     </section>

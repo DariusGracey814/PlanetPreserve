@@ -22,6 +22,8 @@
 body {
   padding: 0;
   margin: 0;
+  width: 100%;
+  height: 100vh;
   font-family: var(--roboto--ff);
   overflow: hidden;
 }
@@ -122,10 +124,22 @@ form {
   font-size: 0.9rem;
 }
 
-.form-control {
+.form-control,
+.form-control2 {
   padding: 0.5em 1.9em;
   margin-bottom: 1em;
   background: var(--white-offset);
+}
+
+.form-control2 {
+  background-color: #ffffff;
+  padding: 0.5em;
+}
+
+.contribution-form {
+  width: 80%;
+  background-color: var(--white-offset);
+  margin-bottom: 2.5em;
 }
 
 .btn {
@@ -221,6 +235,10 @@ form {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+}
+
+.mobile-header {
+  display: none;
 }
 
 .dashboard_grid {
@@ -408,6 +426,13 @@ ul {
     margin-bottom: 2em;
   }
 
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 3.5rem;
+  }
+
   .map-container {
     width: 100%;
     height: 98%;
@@ -420,10 +445,15 @@ ul {
   }
 
   .mobile-nav {
-    margin-left: 2px;
-    opacity: 0.8;
+    top: 20px;
+    left: 7px;
+    opacity: 1;
     transition: all 0.3s ease;
     z-index: 10;
+  }
+
+  .align-add {
+    margin-top: -0.5em;
   }
 
   .mobile-nav:active,
@@ -463,9 +493,17 @@ ul {
     transition: all 0.3s ease;
   }
 
-  .mobile-closeIcon:active,
-  .mobile-closeIcon:hover {
-    opacity: 0.8;
+  .username {
+    font-size: 1.1rem;
+  }
+
+  .dashboard-icon {
+    font-size: 1rem;
+  }
+
+  .dashboard-icon--wrapper {
+    width: 30px;
+    height: 30px;
   }
 
   .contribution-stats {
@@ -478,9 +516,13 @@ ul {
   }
 
   .contribution-stats.contribution-stats-active {
-    top: 48px;
+    top: 40px;
     right: 0px;
     opacity: 1;
+  }
+
+  .stat-box {
+    box-shadow: none;
   }
 
   .contributions {
@@ -503,6 +545,10 @@ ul {
   .map_wrapper {
     height: 95vh;
     padding: 0.7em;
+  }
+
+  .contribution_sectio {
+    overflow: hidden;
   }
 
   .contributions-tab {
@@ -561,6 +607,12 @@ ul {
   .hero-para {
     line-height: 1.2;
     width: 90%;
+  }
+}
+
+@media (max-width: 580px) {
+  .contribution-form {
+    padding: 1em;
   }
 }
 

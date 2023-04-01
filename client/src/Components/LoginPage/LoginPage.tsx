@@ -13,6 +13,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 const LoginPage: React.FC = () => {
   // Form Input state
   const [errorTracker, setErrorTracker] = useState<number>(0);
+  const [formSubmit, setFormSubmit] = useState<number>(0);
   const [loadState, setLoadState] = useState<boolean>(false);
   // Demo Account States
   const [demoUsername, setDemoUsername] = useState<string>("");
@@ -99,7 +100,7 @@ const LoginPage: React.FC = () => {
           return err?.message;
         });
     }
-  }, [validUsername, validPassword]);
+  }, [formSubmit]);
 
   // Navigate to dashboard if user is authenicated
   useEffect(() => {
@@ -132,6 +133,7 @@ const LoginPage: React.FC = () => {
 
     // Start timer clearing error messages
     setErrorTracker((prevState) => prevState + 1);
+    setFormSubmit((prevState) => prevState + 1);
   };
 
   // demo Account
