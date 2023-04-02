@@ -11,9 +11,6 @@ import GetStarted from "../UI/GetStarted/GetStarted";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const SignupPage: React.FC = () => {
-  const [res, setRes] = useState<string>(
-    "Waiting to send registering user to server"
-  );
   const [errorTracker, setErrorTracker] = useState<number>(0);
   const [loadState, setLoadState] = useState<boolean>(false);
 
@@ -49,11 +46,6 @@ const SignupPage: React.FC = () => {
     (state: RootState) => state.FormData.errorMessage
   );
 
-  // Errors array (map into)
-  const errors: string[] = Array.from(validateError);
-
-  console.log(res);
-
   // Clear error message on initial page load
   useEffect(() => {
     dispatch(formDataActions.setErrorMessage());
@@ -80,13 +72,12 @@ const SignupPage: React.FC = () => {
         password: string;
       } = {
         email: enteredEmail,
-        username: enteredUsername,
+        username: enteredUsername!,
         password: enteredPassword,
       };
 
       dispatch(sendUser(registeredUser))
         .then((response) => {
-          setRes("User successfully sent to the server");
           dispatch(
             formDataActions.setSuccessMessage(
               "Registration successful. You can now login"
@@ -105,8 +96,6 @@ const SignupPage: React.FC = () => {
           dispatch(formDataActions.setValidPassword(false));
         })
         .catch((error) => error?.message);
-    } else {
-      setRes("Credentials are invalid");
     }
   }, [validEmail, validPassword, validUsername]);
 

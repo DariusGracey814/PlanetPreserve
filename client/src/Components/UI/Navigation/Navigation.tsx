@@ -1,13 +1,9 @@
 import React, { FormEvent, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { formDataActions } from "../../../../store/forms";
-import { RootState } from "../../../../store/store";
 
 const Navigation: React.FC = () => {
   const [toggleNav, setToggleNav] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {

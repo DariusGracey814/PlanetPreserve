@@ -17,7 +17,7 @@ const App: React.FC = () => {
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
 
-  const authUser: string = sessionStorage.getItem("authenticatedUser");
+  const authUser: string = sessionStorage.getItem("authenticatedUser")!;
 
   return (
     <div>

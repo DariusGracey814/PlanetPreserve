@@ -86,7 +86,7 @@ const LoginPage: React.FC = () => {
 
       // User validated credentials
       const user: { username: string; password: string } = {
-        username: enteredUsername,
+        username: enteredUsername!,
         password: enteredPassword,
       };
 
@@ -112,8 +112,8 @@ const LoginPage: React.FC = () => {
     }
 
     // Get authenticated session
-    const authUser: string = sessionStorage.getItem("authenticatedUser");
-    const authUsername: string = sessionStorage.getItem("username");
+    const authUser: string = sessionStorage.getItem("authenticatedUser")!;
+    const authUsername: string = sessionStorage.getItem("username")!;
 
     if (authUser === "true" && authUsername !== "") {
       navigate(`/planet-preserve/dashboard/${authUsername}`);
@@ -192,7 +192,7 @@ const LoginPage: React.FC = () => {
               ref={usernameRef}
               name="username"
               readOnly={loadState ? true : false}
-              value={demoUsername !== "" ? demoUsername : null}
+              value={demoUsername !== "" ? demoUsername : ""}
               required
             />
           </div>
@@ -207,7 +207,7 @@ const LoginPage: React.FC = () => {
               className="form-control border shadow-sm"
               ref={passwordRef}
               readOnly={loadState ? true : false}
-              value={demoPassword !== "" ? demoPassword : null}
+              value={demoPassword !== "" ? demoPassword : ""}
               required
             />
           </div>

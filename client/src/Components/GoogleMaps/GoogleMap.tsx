@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 function PlanetPreserveMap({ latitude, longitude }: Props) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
   });
 
   // If map is not loaded return loading state

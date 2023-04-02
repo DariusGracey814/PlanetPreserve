@@ -1,5 +1,5 @@
 import FormUtils from "../../utils/formUtils";
-import { test, expect } from "@jest/globals";
+import { test, expect, describe } from "vitest";
 
 // Form utils validation class
 const formUtils: FormUtils = new FormUtils();
