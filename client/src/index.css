@@ -90,6 +90,14 @@ w-100 {
   background-position: center;
 }
 
+#tree-logo {
+  background-image: url("./assets/tree-logo-apple.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 130px;
+  height: 130px;
+}
+
 .form-hero {
   width: 100%;
   height: 100vh;
