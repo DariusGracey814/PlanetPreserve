@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import FormDataSlice from "./forms";
 import AuthSlice from "./auth";
+import ContributionSlice from "./contribution";
 
 export const store = configureStore({
   reducer: {
     FormData: FormDataSlice,
     AuthSlice: AuthSlice,
+    Contribution: ContributionSlice,
   },
 });
 

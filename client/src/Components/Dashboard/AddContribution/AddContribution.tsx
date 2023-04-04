@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useRef, FormEvent } from "react";
+import { useDispatch } from "react-redux";
 import MobileHeader from "../../UI/Navigation/MobileHeader";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import Stats from "../../Stats/Stats";
@@ -12,6 +13,8 @@ const AddContribution: React.FC = () => {
   const contributionType = useRef(null);
   const description = useRef(null);
   const date = useRef(null);
+
+  const dispatch = useDispatch();
 
   const contributionInfo = (evt: FormEvent) => {
     evt.preventDefault();

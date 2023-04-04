@@ -12,24 +12,21 @@ const initialState: contributionState = {
   date: new Date().toJSON().slice(0, 10),
 };
 
-const contributionSlice = {
+const contributionSlice = createSlice({
   name: "Contribution",
   initialState,
-  reducer: {
-    setType(state: contributionState, action: PayloadAction<string>): void {
+  reducers: {
+    setType(state: any, action: PayloadAction<string>): void {
       state.type = action.payload;
     },
-    setDescription(
-      state: contributionState,
-      action: PayloadAction<string>
-    ): void {
+    setDescription(state: any, action: PayloadAction<string>): void {
       state.description = action.payload;
     },
-    setDate(state: contributionState, action: PayloadAction<string>): void {
+    setDate(state: any, action: PayloadAction<string>): void {
       state.date = action.payload;
     },
   },
-};
+});
 
 // export const contributionSliceActions;
 export default contributionSlice.reducer;
