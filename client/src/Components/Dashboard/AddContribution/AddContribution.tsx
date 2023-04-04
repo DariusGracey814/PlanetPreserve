@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useRef, FormEvent } from "react";
 import MobileHeader from "../../UI/Navigation/MobileHeader";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import Stats from "../../Stats/Stats";
@@ -7,6 +7,19 @@ import Stats from "../../Stats/Stats";
 const AddContribution: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
+
+  // Form Refs
+  const contributionType = useRef(null);
+  const description = useRef(null);
+  const date = useRef(null);
+
+  const contributionInfo = (evt: FormEvent) => {
+    evt.preventDefault();
+
+    console.log(contributionType.current.value!);
+    console.log(description.current.value!);
+    console.log(date.current.value!);
+  };
 
   return (
     <section className="contribution_section grid dashboard_grid w-full h-full">
@@ -32,6 +45,7 @@ const AddContribution: React.FC = () => {
         <form
           method="post"
           className="relative contribution-form p-12 rounded-xl shadow-xl"
+          onSubmit={contributionInfo}
         >
           {/* {loadState ? <LoadingSpinner /> : null} */}
 
@@ -46,6 +60,7 @@ const AddContribution: React.FC = () => {
               name="contributionType"
               className="relative form-control2 border shadow-sm"
               aria-describedby="username"
+              ref={contributionType}
               // readOnly={loadState ? true : false}
               required
             />
@@ -56,7 +71,10 @@ const AddContribution: React.FC = () => {
             <label htmlFor="contributionDesc" className="form-label">
               Description
             </label>
-            <textarea className="form-control2 border shadow-sm"></textarea>
+            <textarea
+              className="form-control2 border shadow-sm"
+              ref={description}
+            ></textarea>
           </div>
 
           <div className="flex flex-col mb-1">
@@ -66,6 +84,7 @@ const AddContribution: React.FC = () => {
             <input
               type="date"
               className="form-control2 border shadow-sm"
+              ref={date}
               // readOnly={loadState ? true : false}
               required
             />
