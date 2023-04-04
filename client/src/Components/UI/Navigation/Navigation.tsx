@@ -1,4 +1,5 @@
-import React, { FormEvent, useState, useEffect } from "react";
+import * as React from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navigation: React.FC = () => {

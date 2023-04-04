@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import * as React from "react";
+import { FormEvent, Suspense, useState } from "react";
 import DashBoardNavigation from "../UI/Navigation/DashBoardNavigation";
 const PlanetPreserveMap = React.lazy(() => import("../GoogleMaps/GoogleMap"));
+import { AiFillStar, AiFillCloseSquare } from "react-icons/ai";
+import { BiMenuAltLeft, BiWorld } from "react-icons/bi";
+import { FaUserAlt } from "react-icons/fa";
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import MobileHeader from "../UI/Navigation/MobileHeader";
 import Stats from "../Stats/Stats";
 

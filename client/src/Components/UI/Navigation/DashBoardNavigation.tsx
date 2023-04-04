@@ -1,5 +1,6 @@
-import React, { Dispatch, FormEvent, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
+import * as React from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthSliceActions } from "../../../../store/auth";
 import { formDataActions } from "../../../../store/forms";
@@ -9,7 +10,7 @@ import {
   AiFillQuestionCircle,
   AiFillCloseSquare,
 } from "react-icons/ai";
-import { BiMessage, BiLogOutCircle } from "react-icons/bi";
+import { BiMessage, BiMenuAltLeft, BiLogOutCircle } from "react-icons/bi";
 import { IoIosAddCircle } from "react-icons/io";
 import { useDispatch } from "react-redux";
 
@@ -19,6 +20,7 @@ interface Props {
 }
 
 function DashBoardNavigation({ expanded, setExpanded }: Props) {
+  const { username } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -60,9 +62,7 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
               <div className="dashboard-icon--wrapper flex items-center justify-center w-10 h-10 rounded-full shadow-md bg-white">
                 <FaUserAlt className="dashboard-icon" />
               </div>
-              <p className="text-white username ml-3">
-                {authUsername} DashBoard
-              </p>
+              <p className="text-white username ml-3">{username} DashBoard</p>
             </div>
 
             <div>

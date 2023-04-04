@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { AiFillStar } from "react-icons/ai";
 import { BiWorld } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";

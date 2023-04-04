@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import * as React from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { formDataActions } from "../../../store/forms";
@@ -46,6 +47,9 @@ const SignupPage: React.FC = () => {
     (state: RootState) => state.FormData.errorMessage
   );
 
+  // Errors array (map into)
+  const errors: string[] = Array.from(validateError);
+
   // Clear error message on initial page load
   useEffect(() => {
     dispatch(formDataActions.setErrorMessage());
@@ -72,7 +76,7 @@ const SignupPage: React.FC = () => {
         password: string;
       } = {
         email: enteredEmail,
-        username: enteredUsername!,
+        username: enteredUsername,
         password: enteredPassword,
       };
 

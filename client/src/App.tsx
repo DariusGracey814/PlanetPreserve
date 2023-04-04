@@ -1,4 +1,5 @@
-import React, { Suspense, useState, useMemo, useEffect } from "react";
+import * as React from "react";
+import { Suspense, useState, useMemo, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Components/UI/Header/Header";
@@ -17,7 +18,7 @@ const App: React.FC = () => {
     (state: RootState) => state.AuthSlice.authenticatedUser
   );
 
-  const authUser: string = sessionStorage.getItem("authenticatedUser")!;
+  const authUser: string = sessionStorage.getItem("authenticatedUser");
 
   return (
     <div>

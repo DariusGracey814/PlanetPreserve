@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, FormEvent } from "react";
+import * as React from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchUser } from "../../../api/LoginAuthApiService";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +87,7 @@ const LoginPage: React.FC = () => {
 
       // User validated credentials
       const user: { username: string; password: string } = {
-        username: enteredUsername!,
+        username: enteredUsername,
         password: enteredPassword,
       };
 
@@ -112,8 +113,8 @@ const LoginPage: React.FC = () => {
     }
 
     // Get authenticated session
-    const authUser: string = sessionStorage.getItem("authenticatedUser")!;
-    const authUsername: string = sessionStorage.getItem("username")!;
+    const authUser: string = sessionStorage.getItem("authenticatedUser");
+    const authUsername: string = sessionStorage.getItem("username");
 
     if (authUser === "true" && authUsername !== "") {
       navigate(`/planet-preserve/dashboard/${authUsername}`);
@@ -192,7 +193,7 @@ const LoginPage: React.FC = () => {
               ref={usernameRef}
               name="username"
               readOnly={loadState ? true : false}
-              value={demoUsername !== "" ? demoUsername : ""}
+              value={demoUsername !== "" ? demoUsername : null}
               required
             />
           </div>
@@ -207,7 +208,7 @@ const LoginPage: React.FC = () => {
               className="form-control border shadow-sm"
               ref={passwordRef}
               readOnly={loadState ? true : false}
-              value={demoPassword !== "" ? demoPassword : ""}
+              value={demoPassword !== "" ? demoPassword : null}
               required
             />
           </div>
