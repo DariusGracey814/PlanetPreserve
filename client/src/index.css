@@ -345,6 +345,10 @@ ul {
 }
 
 /* ------ Dashboard Main Component ----- */
+.dashboard-2 {
+  max-width: 1000px;
+}
+
 .stat_wrapper {
   gap: 1.5rem;
 }
