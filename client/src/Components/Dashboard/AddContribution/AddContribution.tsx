@@ -1,13 +1,16 @@
 import * as React from "react";
-import { useState, useRef, FormEvent } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useRef, useEffect, FormEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { contributionSliceActions } from "../../../../store/contribution";
 import MobileHeader from "../../UI/Navigation/MobileHeader";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import Stats from "../../Stats/Stats";
+import { RootState } from "../../../../store/store";
 
 const AddContribution: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
 
   // Form Refs
   const contributionType = useRef(null);
@@ -16,12 +19,38 @@ const AddContribution: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const contributionInfo = (evt: FormEvent) => {
+  // Contribution Form Data
+  const cType = useSelector((state: RootState) => state.Contribution.type);
+  const cDesc = useSelector(
+    (state: RootState) => state.Contribution.description
+  );
+  const cDate = useSelector((state: RootState) => state.Contribution.date);
+
+  console.log({
+    type: cType,
+    description: cDesc,
+    date: cDate,
+  });
+
+  const contributionInfo = (evt: FormEvent<HTMLButtonElement>) => {
     evt.preventDefault();
 
-    console.log(contributionType.current.value!);
-    console.log(description.current.value!);
-    console.log(date.current.value!);
+    if (
+      contributionType.current.value! !== "" &&
+      description.current.value! !== "" &&
+      date.current.value!
+    ) {
+      setError(false);
+      dispatch(
+        contributionSliceActions.setType(contributionType.current.value!)
+      );
+      dispatch(
+        contributionSliceActions.setDescription(description.current.value!)
+      );
+      dispatch(contributionSliceActions.setDate(date.current.value!));
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -48,9 +77,13 @@ const AddContribution: React.FC = () => {
         <form
           method="post"
           className="relative contribution-form p-12 rounded-xl shadow-xl"
-          onSubmit={contributionInfo}
         >
           {/* {loadState ? <LoadingSpinner /> : null} */}
+          {error ? (
+            <div className="text-white bg-red-200 text-center para">
+              Fields Cannot be empty!
+            </div>
+          ) : null}
 
           {/* Username */}
           <div className="flex flex-col">
@@ -64,7 +97,6 @@ const AddContribution: React.FC = () => {
               className="relative form-control2 border shadow-sm"
               aria-describedby="username"
               ref={contributionType}
-              // readOnly={loadState ? true : false}
               required
             />
           </div>
@@ -88,7 +120,6 @@ const AddContribution: React.FC = () => {
               type="date"
               className="form-control2 border shadow-sm"
               ref={date}
-              // readOnly={loadState ? true : false}
               required
             />
           </div>
@@ -96,6 +127,7 @@ const AddContribution: React.FC = () => {
           <button
             type="submit"
             className="btn btn-form"
+            onClick={contributionInfo}
             // disabled={loadState ? true : false}
           >
             Add Contribution
