@@ -1,23 +1,27 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contributionSliceActions } from "../../../../store/contribution";
+import addContribution from "../../../../api/addContribution";
 import MobileHeader from "../../UI/Navigation/MobileHeader";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import Stats from "../../Stats/Stats";
-import { RootState } from "../../../../store/store";
+import { AppDispatch, RootState } from "../../../../store/store";
 
 const AddContribution: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
+  const [formClick, setFormClick] = useState<number>(0);
 
   // Form Refs
   const contributionType = useRef(null);
   const description = useRef(null);
   const date = useRef(null);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   // Contribution Form Data
   const cType = useSelector((state: RootState) => state.Contribution.type);
@@ -26,11 +30,41 @@ const AddContribution: React.FC = () => {
   );
   const cDate = useSelector((state: RootState) => state.Contribution.date);
 
-  console.log({
-    type: cType,
-    description: cDesc,
-    date: cDate,
-  });
+  // Make post fetch to add contribution api route
+  useEffect(() => {
+    const authenticated: string = sessionStorage.getItem("authenticatedUser");
+    const username: string = sessionStorage.getItem("username");
+
+    const timestamp = Date.parse(cDate);
+    let updatedDate: Date = new Date(timestamp);
+    updatedDate.setDate(updatedDate.getDate() + 1);
+
+    const contribution = {
+      type: cType,
+      description: cDesc,
+      contributionDate: updatedDate,
+      authenticated: authenticated,
+      username: username,
+    };
+
+    if (formClick > 0) {
+      console.log(contribution);
+      dispatch(addContribution(contribution))
+        .then((res) => {
+          console.log("Added Contribution: ", res);
+          if (
+            res.payload.toLowerCase() === "successfully added user contribution"
+          ) {
+            // navigate("/");
+            console.log("Success");
+          }
+        })
+        .catch((err) => {
+          console.log(err.message);
+          return err.message;
+        });
+    }
+  }, [formClick, setFormClick]);
 
   const contributionInfo = (evt: FormEvent<HTMLButtonElement>) => {
     evt.preventDefault();
@@ -51,6 +85,8 @@ const AddContribution: React.FC = () => {
     } else {
       setError(true);
     }
+
+    setFormClick((prevCount) => prevCount + 1);
   };
 
   return (
