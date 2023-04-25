@@ -1,12 +1,48 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import getContributions from "../../../../api/getContributions";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import MobileHeader from "../../UI/Navigation/MobileHeader";
 import Contribution from "./Contribution";
+import { AppDispatch } from "../../../../store/store";
+
+interface Contribution {
+  timestamp: any;
+  contributionId: number;
+  type: string;
+  description: string;
+  date: Date;
+}
 
 function Contributions() {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
+  const [contributions, setContributions] = useState<Contribution[]>();
+
+  const dispatch = useDispatch<AppDispatch>();
+  const authenticated = sessionStorage.getItem("authenticatedUser");
+  const username = sessionStorage.getItem("username");
+
+  console.log(contributions!);
+
+  useEffect(() => {
+    const fetchUserContributions = async () => {
+      dispatch(getContributions({ username, authenticated }))
+        .then((res) => {
+          setContributions(res.payload);
+        })
+        .catch((err) => {
+          return err?.message;
+        });
+    };
+
+    fetchUserContributions();
+
+    return () => {
+      console.log("Cleaning things up");
+    };
+  }, []);
 
   return (
     <section className="contribution_section grid dashboard_grid w-full h-full">
@@ -28,7 +64,25 @@ function Contributions() {
       {/* User contributions */}
       <div className="contributions-wrapper">
         <h1 className="text-3xl text-center mb-5">User Contributions</h1>
-        <Contribution />
+        {/* Map threw and display user contributions */}
+        {contributions?.map((contribution) => {
+          let formattedDate = new Date(contribution.timestamp)
+            .toISOString()
+            .split("T")[0]
+            .split("-");
+          console.log(formattedDate);
+
+          const newDate = `${formattedDate[1]}-${formattedDate[2]}-${formattedDate[0]}`;
+
+          return (
+            <Contribution
+              key={contribution.contributionId}
+              contributionType={contribution.type}
+              contributionDesc={contribution.description}
+              enteredDate={newDate}
+            />
+          );
+        })}
       </div>
     </section>
   );

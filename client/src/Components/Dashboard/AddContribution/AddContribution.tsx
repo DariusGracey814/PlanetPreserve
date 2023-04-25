@@ -36,13 +36,11 @@ const AddContribution: React.FC = () => {
     const username: string = sessionStorage.getItem("username");
 
     const timestamp = Date.parse(cDate);
-    let updatedDate: Date = new Date(timestamp);
-    updatedDate.setDate(updatedDate.getDate() + 1);
 
     const contribution = {
       type: cType,
       description: cDesc,
-      contributionDate: updatedDate,
+      timestamp: timestamp,
       authenticated: authenticated,
       username: username,
     };
@@ -55,7 +53,6 @@ const AddContribution: React.FC = () => {
           if (
             res.payload.toLowerCase() === "successfully added user contribution"
           ) {
-            navigate(`/planet-preserve/user=:${username}/contributions`);
             console.log("Success");
           }
         })

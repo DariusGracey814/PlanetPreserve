@@ -6,17 +6,18 @@ const addContribution = createAsyncThunk(
   async (contribution: {
     type: string;
     description: string;
-    contributionDate: Date;
+    timestamp: number;
     authenticated: string;
     username: string;
   }) => {
     try {
+      console.log(contribution);
       const response = await apiClient.post(
         `/planet-preserve/${contribution.username}/${contribution.authenticated}/add-contribution`,
         {
           type: contribution.type,
           description: contribution.description,
-          contributionDate: contribution.contributionDate,
+          timestamp: contribution.timestamp,
 
           headers: {
             "Content-Type": "application/json",
