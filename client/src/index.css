@@ -498,12 +498,13 @@ ul {
 
 .contribution-btn--wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: center;
 }
 
 .contribution-btn {
-  padding: 0.3em 0.8em;
+  padding: 0.3em 0.7em;
   background-color: #df4759;
   color: var(--white-offset);
   cursor: pointer;
@@ -511,8 +512,18 @@ ul {
   transition: all 0.3s ease;
 }
 
+#btn-update {
+  background-color: #ffc107;
+  color: var(--main--green);
+  margin-bottom: 0.4em;
+}
+
 .contribution-btn:hover {
   background-color: #f74e61;
+}
+
+.btn-update:hover {
+  background-color: #ffcb30;
 }
 
 /* --------- MEDIA QUERIES ---------- */

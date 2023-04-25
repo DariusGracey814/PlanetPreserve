@@ -42,6 +42,9 @@ function Contribution({
 
           {/* Col 4 */}
           <div className="contribution-btn--wrapper">
+            <button id="btn-update" className={"contribution-btn"}>
+              Update
+            </button>
             <button className={"contribution-btn"}>Delete</button>
           </div>
         </div>
