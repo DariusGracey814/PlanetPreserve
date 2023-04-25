@@ -55,12 +55,11 @@ const AddContribution: React.FC = () => {
           if (
             res.payload.toLowerCase() === "successfully added user contribution"
           ) {
-            // navigate("/");
+            navigate(`/planet-preserve/user=:${username}/contributions`);
             console.log("Success");
           }
         })
         .catch((err) => {
-          console.log(err.message);
           return err.message;
         });
     }

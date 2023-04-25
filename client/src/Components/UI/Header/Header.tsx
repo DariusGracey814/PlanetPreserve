@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   return (
     <header className="header w-full absolute top-0 left-0 justify-end py-5 px-5">
       {/* Display main nav if user is not authenticated */}
-      {authenticated ? null : <Navigation />}
+      {authUser === "true" ? null : <Navigation />}
     </header>
   );
 };

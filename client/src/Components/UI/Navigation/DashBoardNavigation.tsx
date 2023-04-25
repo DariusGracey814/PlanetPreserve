@@ -111,7 +111,10 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
             <li className="flex items-center mb-4 dashboard-link">
               <FaUserAlt className="nav-icon" />
-              <Link to="/dashboard" className="nav-text ml-4">
+              <Link
+                to="/planet-preserve/contributions"
+                className="nav-text ml-4"
+              >
                 My Contributions
               </Link>
             </li>

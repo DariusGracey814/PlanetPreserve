@@ -12,6 +12,9 @@ const Dashboard = React.lazy(() => import("./Components/Dashboard/Dashboard"));
 const AddContribution = React.lazy(
   () => import("./Components/Dashboard/AddContribution/AddContribution")
 );
+const Contributions = React.lazy(
+  () => import("./Components/Dashboard/Contributions/Contributions")
+);
 
 const App: React.FC = () => {
   const authenticated = useSelector(
@@ -63,7 +66,27 @@ const App: React.FC = () => {
             }
           />
 
-          <Route path="*" element={<LoginPage />} />
+          <Route
+            path={`${
+              authenticated || authUser === "true"
+                ? "/planet-preserve/contributions"
+                : ""
+            }`}
+            element={
+              <Container>
+                <Suspense fallback={<LoadingSpinnerFull />}>
+                  <Contributions />
+                </Suspense>
+              </Container>
+            }
+          />
+
+          {/* <Route
+            path="/planet-preserve/contributions"
+            element={<Contributions />}
+          /> */}
+          {/* 
+          <Route path="*" element={<LoginPage />} /> */}
         </Routes>
       </main>
     </div>
