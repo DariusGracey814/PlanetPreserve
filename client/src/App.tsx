@@ -81,12 +81,7 @@ const App: React.FC = () => {
             }
           />
 
-          {/* <Route
-            path="/planet-preserve/contributions"
-            element={<Contributions />}
-          /> */}
-          {/* 
-          <Route path="*" element={<LoginPage />} /> */}
+          <Route path="*" element={<LoginPage />} />
         </Routes>
       </main>
     </div>

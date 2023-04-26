@@ -8,12 +8,15 @@ import MobileHeader from "../../UI/Navigation/MobileHeader";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import Stats from "../../Stats/Stats";
 import { AppDispatch, RootState } from "../../../../store/store";
+import LoadingSpinner from "../../LoadingSpinner/LoadingSpinner";
+import { LoadingSpinnerFull } from "../../LoadingSpinner/LoadingSpinner";
 
 const AddContribution: React.FC = () => {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [formClick, setFormClick] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Form Refs
   const contributionType = useRef(null);
@@ -46,14 +49,19 @@ const AddContribution: React.FC = () => {
     };
 
     if (formClick > 0) {
-      console.log(contribution);
       dispatch(addContribution(contribution))
         .then((res) => {
+          setLoading(true);
           console.log("Added Contribution: ", res);
           if (
             res.payload.toLowerCase() === "successfully added user contribution"
           ) {
             console.log("Success");
+            // Navigate to contributions
+            setTimeout(() => {
+              navigate("/planet-preserve/contributions");
+              setLoading(false);
+            }, 2000);
           }
         })
         .catch((err) => {
@@ -102,72 +110,78 @@ const AddContribution: React.FC = () => {
         setHidden={setHidden}
       />
 
-      <div className="flex flex-col">
-        <h1 className="form-h1 text-2xl mb-2 text-center py-3">
-          Add Contribution
-        </h1>
-        <form
-          method="post"
-          className="relative contribution-form p-12 rounded-xl shadow-xl"
-        >
-          {/* {loadState ? <LoadingSpinner /> : null} */}
-          {error ? (
-            <div className="text-white bg-red-200 text-center para">
-              Fields Cannot be empty!
-            </div>
-          ) : null}
-
-          {/* Username */}
+      <div className="relative">
+        {loading ? (
+          <LoadingSpinnerFull />
+        ) : (
           <div className="flex flex-col">
-            <label htmlFor="ContributionType" className="form-label">
-              Contribution Type
-            </label>
-            <input
-              type="text"
-              id="contributionType"
-              name="contributionType"
-              className="relative form-control2 border shadow-sm"
-              aria-describedby="username"
-              ref={contributionType}
-              required
-            />
-          </div>
+            <h1 className="form-h1 text-2xl mb-2 text-center py-3">
+              Add Contribution
+            </h1>
+            <form
+              method="post"
+              className="relative contribution-form p-12 rounded-xl shadow-xl"
+            >
+              {/* {loadState ? <LoadingSpinner /> : null} */}
+              {error ? (
+                <div className="text-white bg-red-200 text-center para">
+                  Fields Cannot be empty!
+                </div>
+              ) : null}
 
-          {/* Email Address */}
-          <div className="flex flex-col">
-            <label htmlFor="contributionDesc" className="form-label">
-              Description
-            </label>
-            <textarea
-              className="form-control2 border shadow-sm"
-              ref={description}
-            ></textarea>
-          </div>
+              {/* Username */}
+              <div className="flex flex-col">
+                <label htmlFor="ContributionType" className="form-label">
+                  Contribution Type
+                </label>
+                <input
+                  type="text"
+                  id="contributionType"
+                  name="contributionType"
+                  className="relative form-control2 border shadow-sm"
+                  aria-describedby="username"
+                  ref={contributionType}
+                  required
+                />
+              </div>
 
-          <div className="flex flex-col mb-1">
-            <label htmlFor="contributionDate" className="form-label">
-              Contribution Date
-            </label>
-            <input
-              type="date"
-              className="form-control2 border shadow-sm"
-              ref={date}
-              required
-            />
-          </div>
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="btn btn-form"
-            onClick={contributionInfo}
-            // disabled={loadState ? true : false}
-          >
-            Add Contribution
-          </button>
-        </form>
+              {/* Email Address */}
+              <div className="flex flex-col">
+                <label htmlFor="contributionDesc" className="form-label">
+                  Description
+                </label>
+                <textarea
+                  className="form-control2 border shadow-sm"
+                  ref={description}
+                ></textarea>
+              </div>
 
-        {/* Contributions Stats */}
-        <Stats hidden={hidden} />
+              <div className="flex flex-col mb-1">
+                <label htmlFor="contributionDate" className="form-label">
+                  Contribution Date
+                </label>
+                <input
+                  type="date"
+                  className="form-control2 border shadow-sm"
+                  ref={date}
+                  required
+                />
+              </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="btn btn-form"
+                onClick={contributionInfo}
+                // disabled={loadState ? true : false}
+              >
+                Add Contribution
+              </button>
+            </form>
+
+            {/* Contributions Stats */}
+            <Stats hidden={hidden} />
+          </div>
+        )}
       </div>
     </section>
   );

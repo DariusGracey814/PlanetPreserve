@@ -26,7 +26,6 @@ body {
   height: 100vh;
   font-family: var(--roboto--ff);
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 /* ----- FLEXBOX AND GRID ----- */
@@ -441,7 +440,10 @@ ul {
 
 /* ------- CARD -------- */
 .contributions-wrapper {
+  border: 4px solid red;
+  height: 100vh;
   padding: 3em;
+  overflow-y: auto;
 }
 
 .card-grid {
