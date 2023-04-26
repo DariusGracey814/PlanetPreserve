@@ -533,6 +533,11 @@ ul {
   background-color: #ffcb30;
 }
 
+.sort-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .sortBtn {
   padding: 0.5em 1em;
   margin-bottom: 1em;
