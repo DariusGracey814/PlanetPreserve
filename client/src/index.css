@@ -25,7 +25,8 @@ body {
   width: 100%;
   height: 100vh;
   font-family: var(--roboto--ff);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ----- FLEXBOX AND GRID ----- */
@@ -432,9 +433,14 @@ ul {
   color: var(--main--green);
 }
 
+.contribution-h1 {
+  margin-bottom: 2em;
+  font-weight: 600;
+  color: var(--main--green);
+}
+
 /* ------- CARD -------- */
 .contributions-wrapper {
-  border: 2px solid blue;
   padding: 3em;
 }
 
@@ -449,7 +455,7 @@ ul {
   max-width: 800px;
   margin: 2em auto 0;
   border-radius: 15px;
-  background-color: #f5f5f5;
+  background-color: #ececec;
 }
 
 .card-user {
@@ -723,6 +729,11 @@ ul {
     gap: 0.3em;
   }
 
+  .contribution-btn--wrapper {
+    justify-content: center;
+    align-items: center;
+  }
+
   .con-col {
     text-align: center;
   }
@@ -752,18 +763,36 @@ ul {
 
   .contribution-btn--wrapper {
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
-  .contribution-btn {
-    width: 50%;
+  #btn-update {
+    margin-bottom: 0;
+    margin-right: 1em;
+  }
+
+  .con-text {
+    max-width: 220px;
     margin: 0 auto;
-    padding: 0.4em 0.8em;
   }
 }
 
 @media (max-width: 580px) {
   .contribution-form {
     padding: 1em;
+  }
+
+  .contribution-btn--wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contributions-wrapper {
+    padding: 2em;
   }
 }
 
@@ -794,6 +823,7 @@ ul {
   border-color: var(--main--green) transparent var(--main--green) transparent;
   animation: spinner 1.5s linear infinite;
 }
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);

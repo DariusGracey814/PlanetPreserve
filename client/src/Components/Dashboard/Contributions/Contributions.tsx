@@ -24,7 +24,7 @@ function Contributions() {
   const authenticated = sessionStorage.getItem("authenticatedUser");
   const username = sessionStorage.getItem("username");
 
-  console.log(contributions!);
+  const user = sessionStorage.getItem("username");
 
   useEffect(() => {
     const fetchUserContributions = async () => {
@@ -63,7 +63,7 @@ function Contributions() {
 
       {/* User contributions */}
       <div className="contributions-wrapper">
-        <h1 className="text-3xl text-center mb-5">User Contributions</h1>
+        <h1 className="text-3xl text-center contribution-h1">{`${user} - Eco Contributions`}</h1>
         {/* Map threw and display user contributions */}
         {contributions?.map((contribution) => {
           let formattedDate = new Date(contribution.timestamp)
