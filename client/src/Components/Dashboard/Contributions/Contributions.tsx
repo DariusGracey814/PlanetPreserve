@@ -64,6 +64,9 @@ function Contributions() {
       {/* User contributions */}
       <div className="contributions-wrapper">
         <h1 className="text-3xl text-center contribution-h1">{`${user} - Eco Contributions`}</h1>
+        <div className="flex justify-end">
+          <button className="sortBtn">Sort Contributions</button>
+        </div>
         {/* Map threw and display user contributions */}
         {contributions?.map((contribution) => {
           let formattedDate = new Date(contribution.timestamp)

@@ -433,7 +433,7 @@ ul {
 }
 
 .contribution-h1 {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   font-weight: 600;
   color: var(--main--green);
 }
@@ -531,6 +531,16 @@ ul {
 
 .btn-update:hover {
   background-color: #ffcb30;
+}
+
+.sortBtn {
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  background-color: var(--main--green);
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: var(--white-offset);
+  cursor: pointer;
 }
 
 /* --------- MEDIA QUERIES ---------- */
