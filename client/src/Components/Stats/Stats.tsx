@@ -8,6 +8,8 @@ interface Props {
 }
 
 function Stats({ hidden }: Props) {
+  console.log(hidden);
+
   return (
     <div
       className={`flex p-3 contribution-stats ${

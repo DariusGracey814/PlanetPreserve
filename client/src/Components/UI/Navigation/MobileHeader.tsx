@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import Stats from "../../Stats/Stats";
 
 interface Props {
   expanded: boolean;
@@ -45,6 +46,9 @@ function MobileHeader({ expanded, setExpanded, hidden, setHidden }: Props) {
             &nbsp; {hidden ? "Stats" : "Close"}
           </button>
         </div>
+
+        {/* Contribution bucket 2 */}
+        <Stats hidden={hidden} />
       </div>
     </div>
   );
