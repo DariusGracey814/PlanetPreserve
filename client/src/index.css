@@ -784,6 +784,14 @@ ul {
     justify-content: center;
   }
 
+  .sort-wrapper {
+    justify-content: center;
+  }
+
+  .sortBtn {
+    margin-bottom: 0.5em;
+  }
+
   #btn-update {
     margin-bottom: 0;
     margin-right: 1em;
@@ -792,6 +800,14 @@ ul {
   .con-text {
     max-width: 220px;
     margin: 0 auto;
+  }
+
+  .contribution-h1 {
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--main--green);
+    line-height: 1.2;
+    margin-top: -1em;
   }
 }
 

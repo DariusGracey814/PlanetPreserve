@@ -7,6 +7,8 @@ const Navigation: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const authUser = sessionStorage.getItem("authenticatedUser");
+
   useEffect(() => {
     navigate(toggleNav ? "/planet-preserve/signup" : "/planet-preserve/login");
   }, [toggleNav]);
@@ -20,13 +22,15 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="flex justify-end">
-      <button
-        className="btn nav-link text-white"
-        aria-label={`${!toggleNav ? "Sign Up button" : "Login button"}`}
-        onClick={toggleLogin}
-      >
-        {!toggleNav ? "Signup" : "Login"}
-      </button>
+      {authUser === "true" ? null : (
+        <button
+          className="btn nav-link text-white"
+          aria-label={`${!toggleNav ? "Sign Up button" : "Login button"}`}
+          onClick={toggleLogin}
+        >
+          {!toggleNav ? "Signup" : "Login"}
+        </button>
+      )}
     </nav>
   );
 };
