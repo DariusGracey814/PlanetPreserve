@@ -64,6 +64,9 @@ const Dashboard: React.FC = () => {
               Enable Location to view map
             </div>
           )}
+
+          {/* Contribution bucket 2 */}
+          <Stats hidden={hidden} />
         </div>
       </div>
     </section>

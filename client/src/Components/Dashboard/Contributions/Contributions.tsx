@@ -19,6 +19,9 @@ function Contributions() {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
   const [contributions, setContributions] = useState<Contribution[]>();
+  const [defaultContributions, setDefaultContributions] =
+    useState<Contribution[]>();
+  const [sort, setSort] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const authenticated = sessionStorage.getItem("authenticatedUser");
@@ -31,6 +34,7 @@ function Contributions() {
       dispatch(getContributions({ username, authenticated }))
         .then((res) => {
           setContributions(res.payload);
+          setDefaultContributions(res.payload);
         })
         .catch((err) => {
           return err?.message;
@@ -43,6 +47,26 @@ function Contributions() {
       console.log("Cleaning things up");
     };
   }, []);
+
+  // Side Effect for sort button
+  useEffect(() => {
+    if (sort) {
+      const copy = contributions.slice();
+      const sortedContributions: Contribution[] = copy.sort((a, b) => {
+        if (a.timestamp > b.timestamp) return 1;
+        if (a.timestamp < b.timestamp) return -1;
+        return 0;
+      });
+
+      setContributions(sortedContributions);
+    } else {
+      setContributions(defaultContributions);
+    }
+  }, [sort, setSort]);
+
+  const sortContributionsHandler = () => {
+    setSort((prevState) => !prevState);
+  };
 
   return (
     <section className="contribution_section grid dashboard_grid w-full h-full">
@@ -65,7 +89,13 @@ function Contributions() {
       <div className="contributions-wrapper">
         <h1 className="text-3xl text-center contribution-h1">{`${user} - Eco Contributions`}</h1>
         <div className="sort-wrapper flex justify-end">
-          <button className="sortBtn">Sort Contributions</button>
+          <button
+            className="sortBtn"
+            type="button"
+            onClick={sortContributionsHandler}
+          >
+            {!sort ? "Sort by Date" : "Default Sort"}
+          </button>
         </div>
         {/* Map threw and display user contributions */}
         {contributions?.map((contribution) => {
