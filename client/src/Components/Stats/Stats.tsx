@@ -22,7 +22,11 @@ function Stats({ hidden }: Props) {
     const fetchUserContributions = async () => {
       dispatch(getContributions({ username, authenticated }))
         .then((res) => {
-          setContributions(res.payload.length);
+          if (res.payload) {
+            setContributions(res.payload.length);
+          } else {
+            setContributions(0);
+          }
         })
         .catch((err) => {
           return err === Error ? err?.message : null;
