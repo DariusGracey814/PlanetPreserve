@@ -1,14 +1,36 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
+import getContributions from "../../../api/getContributions";
+import { useDispatch } from "react-redux";
 import { AiFillStar } from "react-icons/ai";
 import { BiWorld } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
+import { AppDispatch } from "../../../store/store";
 
 interface Props {
   hidden: boolean;
 }
 
 function Stats({ hidden }: Props) {
-  console.log(hidden);
+  const [contributions, setContributions] = useState<number>(0);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const authenticated: string = sessionStorage.getItem("authenticatedUser");
+  const username: string = sessionStorage.getItem("username");
+
+  useEffect(() => {
+    const fetchUserContributions = async () => {
+      dispatch(getContributions({ username, authenticated }))
+        .then((res) => {
+          setContributions(res.payload.length);
+        })
+        .catch((err) => {
+          return err === Error ? err?.message : null;
+        });
+    };
+
+    fetchUserContributions();
+  }, []);
 
   return (
     <div
@@ -31,7 +53,7 @@ function Stats({ hidden }: Props) {
           <p className="mb-1">Your Contributions</p>
           <p className="flex items-center">
             <FaUserAlt className="stat-icon user-icon" />
-            <span className="text-lg">30</span>
+            <span className="text-lg">{contributions}</span>
           </p>
         </div>
 
@@ -40,7 +62,7 @@ function Stats({ hidden }: Props) {
           <p className="mb-1">Eco Stars</p>
           <p className="flex items-center">
             <AiFillStar className="stat-icon" />
-            <span className="text-lg">30</span>
+            <span className="text-lg">{contributions}</span>
           </p>
         </div>
       </div>
