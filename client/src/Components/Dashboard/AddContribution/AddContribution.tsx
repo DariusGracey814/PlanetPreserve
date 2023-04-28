@@ -51,8 +51,8 @@ const AddContribution: React.FC = () => {
       timestamp: timestamp,
       authenticated: authenticated,
       username: username,
-      latitude: 42.2048,
-      longitude: 83.4852,
+      latitude: +latitude,
+      longitude: +longitude,
     };
 
     if (formClick > 0) {
