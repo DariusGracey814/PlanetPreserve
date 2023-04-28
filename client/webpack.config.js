@@ -56,7 +56,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"],
+    extensions: [".ts", ".tsx", "jsx", ".js", ".json"],
   },
 
   // Plugins

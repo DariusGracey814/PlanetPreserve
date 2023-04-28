@@ -26,12 +26,17 @@ const AddContribution: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  // User location
+
   // Contribution Form Data
   const cType = useSelector((state: RootState) => state.Contribution.type);
   const cDesc = useSelector(
     (state: RootState) => state.Contribution.description
   );
   const cDate = useSelector((state: RootState) => state.Contribution.date);
+
+  const latitude = sessionStorage.getItem("latitude");
+  const longitude = sessionStorage.getItem("longitude");
 
   // Make post fetch to add contribution api route
   useEffect(() => {
@@ -46,6 +51,8 @@ const AddContribution: React.FC = () => {
       timestamp: timestamp,
       authenticated: authenticated,
       username: username,
+      latitude: 42.2048,
+      longitude: 83.4852,
     };
 
     if (formClick > 0) {

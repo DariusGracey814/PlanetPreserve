@@ -9,6 +9,8 @@ const addContribution = createAsyncThunk(
     timestamp: number;
     authenticated: string;
     username: string;
+    latitude: number;
+    longitude: number;
   }) => {
     try {
       console.log(contribution);
@@ -18,6 +20,8 @@ const addContribution = createAsyncThunk(
           type: contribution.type,
           description: contribution.description,
           timestamp: contribution.timestamp,
+          latitude: contribution.latitude,
+          longitude: contribution.longitude,
 
           headers: {
             "Content-Type": "application/json",

@@ -4,6 +4,8 @@ interface contributionState {
   type: string;
   description: string;
   date: string;
+  latitude: number;
+  longitude: number;
 }
 
 const date = new Date();
@@ -17,6 +19,8 @@ const initialState: contributionState = {
   type: "",
   description: "",
   date: currentDate,
+  latitude: 0,
+  longitude: 0,
 };
 
 const contributionSlice = createSlice({
@@ -37,6 +41,15 @@ const contributionSlice = createSlice({
     setDate(state: contributionState, action: PayloadAction<string>): void {
       state.date = action.payload;
       console.log(state.date);
+    },
+    setLatitude(state: contributionState, action: PayloadAction<number>): void {
+      state.latitude = action.payload;
+    },
+    setLongitude(
+      state: contributionState,
+      action: PayloadAction<number>
+    ): void {
+      state.longitude = action.payload;
     },
   },
 });

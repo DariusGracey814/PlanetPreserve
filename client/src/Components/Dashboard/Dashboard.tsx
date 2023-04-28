@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import DashBoardNavigation from "../UI/Navigation/DashBoardNavigation";
-const PlanetPreserveMap = React.lazy(() => import("../GoogleMaps/GoogleMap"));
+import PlanetPreserveMap from "../GoogleMaps/GoogleMap";
 import MobileHeader from "../UI/Navigation/MobileHeader";
 import Stats from "../Stats/Stats";
 
@@ -10,6 +11,10 @@ const Dashboard: React.FC = () => {
   const [hidden, setHidden] = useState<boolean>(true);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
+
+  const dispatch = useDispatch();
+  sessionStorage.setItem("latitude", `${latitude!}`);
+  sessionStorage.setItem("longitude", `${longitude!}`);
 
   // Geolocation of user for google maps api
   const options = {
