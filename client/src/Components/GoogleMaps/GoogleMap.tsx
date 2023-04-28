@@ -49,7 +49,7 @@ function PlanetPreserveMap({ latitude, longitude }) {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={10}
+          zoom={8}
           onLoad={(map) => {
             map.setMapTypeId("hybrid");
           }}
