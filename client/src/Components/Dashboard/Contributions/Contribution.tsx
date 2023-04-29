@@ -1,20 +1,43 @@
 import * as React from "react";
+import { useDispatch } from "react-redux";
+import deleteContribution from "../../../../api/deleteContribution";
+import { AppDispatch } from "../../../../store/store";
 
 interface Props {
+  contributionId: number;
   contributionType: string;
   contributionDesc: string;
   enteredDate: string;
+  setDeleted: any;
 }
 
 function Contribution({
   contributionType,
   contributionDesc,
   enteredDate,
+  contributionId,
+  setDeleted,
 }: Props) {
   const user = sessionStorage.getItem("username");
+  const dispatch = useDispatch<AppDispatch>();
+
+  const deleteContributionHandler = (evt: { currentTarget: any }) => {
+    const id: number =
+      evt.currentTarget.parentNode.parentNode.parentNode.parentNode.id;
+
+    dispatch(deleteContribution(id))
+      .then((res) => {
+        if (res) {
+          setDeleted(true);
+        }
+      })
+      .catch((err) => {
+        return err === Error ? err?.message : null;
+      });
+  };
 
   return (
-    <div className="card card-grid shadow-lg">
+    <div className="card card-grid shadow-lg" id={`${contributionId}`}>
       <div className="card-user">
         <span>{user[0]}</span>
       </div>
@@ -42,10 +65,12 @@ function Contribution({
 
           {/* Col 4 */}
           <div className="contribution-btn--wrapper">
-            <button id="btn-update" className={"contribution-btn"}>
-              Update
+            <button
+              className={"contribution-btn"}
+              onClick={deleteContributionHandler}
+            >
+              Delete
             </button>
-            <button className={"contribution-btn"}>Delete</button>
           </div>
         </div>
       </div>

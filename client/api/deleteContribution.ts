@@ -1,29 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import apiClient from "./apiClient";
 
-interface Props {
-  contributionId: number;
-}
-
-const deletContributions = createAsyncThunk(
+const deleteContribution = createAsyncThunk(
   "/planet-preserve/delete-contribution",
-  async (Props) => {
+  async (contributionId: number) => {
     try {
-      const response = await apiClient.delete(
-        `/planet-preserve/delete-contribution/${Props.contributionId}`
-      );
+      console.log(contributionId);
 
+      const response = await apiClient.delete(
+        `/planet-preserve/delete-contribution/${contributionId}`
+      );
       if (response.status !== 200) {
         throw new Error(
-          `Error deleting contribution with id: ${Props.contributionId}`
+          `Error deleting contribution with id: ${contributionId}`
         );
       }
-
-      const data = await response.json();
-
-      return data.data;
     } catch (err) {
       return err === Error ? err?.message : null;
     }
   }
 );
+
+export default deleteContribution;

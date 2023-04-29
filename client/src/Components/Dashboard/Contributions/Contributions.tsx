@@ -22,6 +22,7 @@ function Contributions() {
   const [defaultContributions, setDefaultContributions] =
     useState<Contribution[]>();
   const [sort, setSort] = useState<boolean>(false);
+  const [deleted, setDeleted] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const authenticated = sessionStorage.getItem("authenticatedUser");
@@ -46,7 +47,7 @@ function Contributions() {
     return () => {
       console.log("Cleaning things up");
     };
-  }, []);
+  }, [deleted, setDeleted]);
 
   // Side Effect for sort button
   useEffect(() => {
@@ -109,9 +110,11 @@ function Contributions() {
           return (
             <Contribution
               key={contribution.contributionId}
+              contributionId={contribution.contributionId}
               contributionType={contribution.type}
               contributionDesc={contribution.description}
               enteredDate={newDate}
+              setDeleted={setDeleted}
             />
           );
         })}
