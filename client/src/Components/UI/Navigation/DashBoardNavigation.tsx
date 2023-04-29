@@ -131,14 +131,20 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
             <li className="flex items-center mb-4 dashboard-link">
               <FaEdit className="nav-icon" />
-              <Link to="/dashboard" className="nav-text ml-4">
+              <Link
+                to="/planet-preserve/contributions"
+                className="nav-text ml-4"
+              >
                 Edit Contribution
               </Link>
             </li>
 
             <li className="flex items-center mb-4 dashboard-link">
               <FaTrashAlt className="nav-icon" />
-              <Link to="/dashboard" className="nav-text ml-4">
+              <Link
+                to="/planet-preserve/contributions"
+                className="nav-text ml-4"
+              >
                 Delete Contribution
               </Link>
             </li>
