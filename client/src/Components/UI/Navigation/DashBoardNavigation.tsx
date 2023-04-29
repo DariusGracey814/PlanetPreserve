@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+  useEffect,
+} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AuthSliceActions } from "../../../../store/auth";
@@ -19,7 +25,17 @@ interface Props {
   setExpanded: Dispatch<SetStateAction<boolean>>;
 }
 
+const activeUser = sessionStorage.getItem("username");
+
 function DashBoardNavigation({ expanded, setExpanded }: Props) {
+  const [searchInput, setSearchInput] = useState<string>("");
+  const [searchLinks, setSearchLinks] = useState<string[]>([
+    "Overview",
+    "Delete Contribution",
+    "My Contributions",
+    "Add Contribution",
+  ]);
+  const [searchFiltered, setSearchFiltered] = useState<string[]>([]);
   const { username } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,6 +45,13 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
   const closeNavigation = (evt: FormEvent) => {
     setExpanded((prevState) => !prevState);
   };
+
+  useEffect(() => {
+    const filteredSearch = searchLinks.filter((link) =>
+      link.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    setSearchFiltered(filteredSearch);
+  }, [searchInput, setSearchInput]);
 
   const logoutHandler = (evt: FormEvent) => {
     evt.preventDefault();
@@ -46,6 +69,10 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
     setTimeout(() => {
       navigate("/planet-preserve/login");
     }, 2000);
+  };
+
+  const searchBarHandler = (evt: React.FormEvent<HTMLButtonElement>) => {
+    setSearchInput(evt.currentTarget.value);
   };
 
   return (
@@ -82,13 +109,27 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
           <div>
             <form className="relative search">
               <input
-                className="rounded-lg shadow-md"
+                className="shadow-md"
                 type="text"
                 placeholder="Quick Find"
+                onChange={(evt) => searchBarHandler(evt)}
               />
               <button className="absolute search-btn" type="submit">
                 <AiOutlineSearch className="search_icon" />
               </button>
+
+              {searchInput.length > 0 ? (
+                <div className="searchBar-container">
+                  {searchFiltered.length >= 1 ? (
+                    searchFiltered.map((link) => {
+                      console.log(link);
+                      return <p>{link}</p>;
+                    })
+                  ) : (
+                    <p>No results found</p>
+                  )}
+                </div>
+              ) : null}
             </form>
           </div>
 
