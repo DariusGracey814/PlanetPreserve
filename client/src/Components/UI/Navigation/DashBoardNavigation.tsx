@@ -75,6 +75,31 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
     setSearchInput(evt.currentTarget.value);
   };
 
+  const searchBarNavigate = (evt: { target: any }) => {
+    const activeUser: string = sessionStorage.getItem("username");
+
+    switch (evt.target.textContent.toLowerCase()) {
+      case "my contributions":
+        navigate("/planet-preserve/contributions");
+        break;
+
+      case "add contribution":
+        navigate(`/planet-preserve/${activeUser}/add-contribution`);
+        break;
+
+      case "delete contribution":
+        navigate("/planet-preserve/contributions");
+        break;
+
+      case "overview":
+        navigate(`/planet-preserve/dashboard/${activeUser}`);
+        break;
+
+      default:
+        return;
+    }
+  };
+
   return (
     <div className="d_nav--wrapper">
       <aside
@@ -109,7 +134,6 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
           <div>
             <form className="relative search">
               <input
-                className="shadow-md"
                 type="text"
                 placeholder="Quick Find"
                 onChange={(evt) => searchBarHandler(evt)}
@@ -122,8 +146,7 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
                 <div className="searchBar-container">
                   {searchFiltered.length >= 1 ? (
                     searchFiltered.map((link) => {
-                      console.log(link);
-                      return <p>{link}</p>;
+                      return <p onClick={searchBarNavigate}>{link}</p>;
                     })
                   ) : (
                     <p>No results found</p>

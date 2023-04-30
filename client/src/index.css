@@ -129,7 +129,6 @@ w-100 {
 }
 
 .searchBar-container {
-  position: absolute;
   width: 100%;
   padding: 1em 0.5em 0.5em;
   background-color: #ffffff;
@@ -140,6 +139,12 @@ w-100 {
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 0.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.searchBar-container p:hover {
+  cursor: pointer;
 }
 
 /* ------ FORMS ------ */
