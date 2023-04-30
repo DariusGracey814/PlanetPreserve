@@ -39,17 +39,13 @@ function PlanetPreserveMap({ latitude, longitude }) {
       });
   }, []);
 
-  // // If map is not loaded return loading state
-  // if (!isLoaded)
-  //   return <div className="flex justify-center items-center">Loading...</div>;
-
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
       <div style={{ padding: "0.7em", borderRadius: "10px" }}>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={8}
+          zoom={7}
           onLoad={(map) => {
             map.setMapTypeId("hybrid");
           }}
