@@ -9,6 +9,7 @@ interface Props {
   contributionDesc: string;
   enteredDate: string;
   setDeleted: any;
+  all?: boolean;
 }
 
 function Contribution({
@@ -17,6 +18,7 @@ function Contribution({
   enteredDate,
   contributionId,
   setDeleted,
+  all,
 }: Props) {
   const user = sessionStorage.getItem("username");
   const dispatch = useDispatch<AppDispatch>();
@@ -39,10 +41,10 @@ function Contribution({
   return (
     <div className="card card-grid shadow-lg" id={`${contributionId}`}>
       <div className="card-user">
-        <span>{user[0]}</span>
+        <span>{all ? "C" : user[0]}</span>
       </div>
       <div className="contribution-col2">
-        <div className="col-row">
+        <div className={`${all ? "col-row--true" : "col-row"}`}>
           <div className={"content-wrapper"}>
             {/*  Col 1 */}
             <div className="con-col">
@@ -64,14 +66,16 @@ function Contribution({
           </div>
 
           {/* Col 4 */}
-          <div className="contribution-btn--wrapper">
-            <button
-              className={"contribution-btn"}
-              onClick={deleteContributionHandler}
-            >
-              Delete
-            </button>
-          </div>
+          {!all ? (
+            <div className="contribution-btn--wrapper">
+              <button
+                className={"contribution-btn"}
+                onClick={deleteContributionHandler}
+              >
+                Delete
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

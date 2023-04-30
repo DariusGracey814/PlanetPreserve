@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import getContributions from "../../../../api/getContributions";
+import { getAllContributions } from "../../../../api/getContributions";
 import DashBoardNavigation from "../../UI/Navigation/DashBoardNavigation";
 import MobileHeader from "../../UI/Navigation/MobileHeader";
-import Contribution from "./Contribution";
+import Contribution from "../Contributions/Contribution";
 import { AppDispatch } from "../../../../store/store";
 
 interface Contribution {
@@ -15,7 +15,7 @@ interface Contribution {
   date: Date;
 }
 
-function Contributions() {
+function AllContributions() {
   const [expanded, setExpanded] = useState<boolean>(false);
   const [hidden, setHidden] = useState<boolean>(true);
   const [contributions, setContributions] = useState<Contribution[]>();
@@ -25,14 +25,12 @@ function Contributions() {
   const [deleted, setDeleted] = useState<boolean>(false);
 
   const dispatch = useDispatch<AppDispatch>();
-  const authenticated = sessionStorage.getItem("authenticatedUser");
-  const username = sessionStorage.getItem("username");
 
-  const user = sessionStorage.getItem("username");
+  const user: string = sessionStorage.getItem("username");
 
   useEffect(() => {
     const fetchUserContributions = async () => {
-      dispatch(getContributions({ username, authenticated }))
+      dispatch(getAllContributions())
         .then((res) => {
           setContributions(res.payload);
           setDefaultContributions(res.payload);
@@ -88,7 +86,9 @@ function Contributions() {
 
       {/* User contributions */}
       <div className="contributions-wrapper">
-        <h1 className="text-3xl text-center contribution-h1">{`${user} - Eco Contributions`}</h1>
+        <h1 className="text-3xl text-center contribution-h1">
+          All Eco Contributions
+        </h1>
         <div className="sort-wrapper flex justify-end">
           <button
             className="sortBtn"
@@ -115,7 +115,7 @@ function Contributions() {
               contributionDesc={contribution.description}
               enteredDate={newDate}
               setDeleted={setDeleted}
-              all={false}
+              all={true}
             />
           );
         })}
@@ -124,4 +124,4 @@ function Contributions() {
   );
 }
 
-export default Contributions;
+export default AllContributions;

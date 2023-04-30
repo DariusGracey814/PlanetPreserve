@@ -518,10 +518,18 @@ ul {
   color: #f5f5f5;
 }
 
-.col-row {
+.col-row,
+.col-row--true {
   display: grid;
-  grid-template-columns: 5fr 1fr;
   gap: 1em;
+}
+
+.col-row {
+  grid-template-columns: 5fr 1fr;
+}
+
+.col-row--true {
+  grid-template-columns: 1fr;
 }
 
 .content-wrapper {
@@ -543,6 +551,10 @@ ul {
   font-weight: 600;
   color: var(--main--green);
   margin-bottom: 0.4em;
+}
+
+.contribution-form {
+  background-color: #ececec;
 }
 
 .contribution-btn--wrapper {

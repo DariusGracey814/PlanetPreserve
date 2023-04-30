@@ -16,6 +16,10 @@ const Contributions = React.lazy(
   () => import("./Components/Dashboard/Contributions/Contributions")
 );
 
+const AllContributions = React.lazy(
+  () => import("./Components/Dashboard/AllContributions/AllContributions")
+);
+
 const App: React.FC = () => {
   const authenticated = useSelector(
     (state: RootState) => state.AuthSlice.authenticatedUser
@@ -76,6 +80,21 @@ const App: React.FC = () => {
               <Container>
                 <Suspense fallback={<LoadingSpinnerFull />}>
                   <Contributions />
+                </Suspense>
+              </Container>
+            }
+          />
+
+          <Route
+            path={`${
+              authenticated || authUser === "true"
+                ? "/planet-preserve/all-contributions"
+                : ""
+            }`}
+            element={
+              <Container>
+                <Suspense fallback={<LoadingSpinnerFull />}>
+                  <AllContributions />
                 </Suspense>
               </Container>
             }
