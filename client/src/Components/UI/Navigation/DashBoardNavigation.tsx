@@ -34,6 +34,7 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
     "Delete Contribution",
     "My Contributions",
     "Add Contribution",
+    "All Contributions",
   ]);
   const [searchFiltered, setSearchFiltered] = useState<string[]>([]);
   const { username } = useParams();
@@ -85,6 +86,10 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
 
       case "add contribution":
         navigate(`/planet-preserve/${activeUser}/add-contribution`);
+        break;
+
+      case "all contributions":
+        navigate(`/planet-preserve/all-contributions`);
         break;
 
       case "delete contribution":
