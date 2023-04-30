@@ -194,6 +194,13 @@ function DashBoardNavigation({ expanded, setExpanded }: Props) {
             </li>
 
             <li className="flex items-center mb-4 dashboard-link">
+              <IoIosAddCircle className="nav-icon" />
+              <Link to="/" className="nav-text ml-4">
+                All Contributions
+              </Link>
+            </li>
+
+            <li className="flex items-center mb-4 dashboard-link">
               <FaTrashAlt className="nav-icon" />
               <Link
                 to="/planet-preserve/contributions"
